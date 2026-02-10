@@ -71,8 +71,8 @@ document.addEventListener('DOMContentLoaded', () => {
     playBtn.disabled = false;
     audioProgress.style.width = '0%';
 
-    // Audio
-    audioEl.src = track.audio;
+    // Audio — use full track if available, fall back to quiz clip
+    audioEl.src = track.audioFull || track.audio;
     audioEl.load();
 
     // Auto-play
