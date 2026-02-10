@@ -8,6 +8,29 @@ const Submit = (() => {
   const ENDPOINT = QUIZ_DATA.submitEndpoint || null;
   const STORAGE_KEY = 'vcquiz';
 
+  /* Format a timestamp (ms) to readable string */
+  function formatTime(ms) {
+    if (!ms) return '';
+    const d = new Date(ms);
+    return d.toLocaleString('en-GB', {
+      day: '2-digit', month: '2-digit', year: 'numeric',
+      hour: '2-digit', minute: '2-digit', second: '2-digit',
+    });
+  }
+
+  /* Format duration (ms) to seconds with 1 decimal */
+  function formatDuration(ms) {
+    if (!ms) return '';
+    return (ms / 1000).toFixed(1) + 's';
+  }
+
+  /* Remove a track from the submission queue */
+  function removeFromQueue(trackId) {
+    const queue = JSON.parse(localStorage.getItem(STORAGE_KEY + '_queue') || '[]');
+    const updated = queue.filter(id => id !== trackId);
+    localStorage.setItem(STORAGE_KEY + '_queue', JSON.stringify(updated));
+  }
+
   /* Send a single answer to the Google Sheet */
   async function sendAnswer(trackId) {
     if (!ENDPOINT) return false;
@@ -18,18 +41,23 @@ const Submit = (() => {
     try {
       const resp = await fetch(ENDPOINT, {
         method: 'POST',
-        headers: { 'Content-Type': 'text/plain' }, // Apps Script needs this for CORS
+        headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify({
           teamId: answer.teamId || App.getTeam(),
           trackId: trackId,
           artist: answer.artist,
           song: answer.song,
-          firstPlayTime: answer.firstPlayTime,
-          firstSubmitTime: answer.firstSubmitTime,
-          duration: answer.duration,
+          firstPlayTime: formatTime(answer.firstPlayTime),
+          firstSubmitTime: formatTime(answer.firstSubmitTime),
+          duration: formatDuration(answer.duration),
         }),
       });
-      return resp.ok || resp.redirected; // Apps Script redirects on success
+
+      const ok = resp.ok || resp.redirected;
+      if (ok) {
+        removeFromQueue(trackId);
+      }
+      return ok;
     } catch {
       return false;
     }
@@ -42,26 +70,21 @@ const Submit = (() => {
     const queue = JSON.parse(localStorage.getItem(STORAGE_KEY + '_queue') || '[]');
     if (queue.length === 0) return;
 
-    const remaining = [];
-
-    for (const trackId of queue) {
-      const ok = await sendAnswer(trackId);
-      if (!ok) remaining.push(trackId);
+    // Copy queue since sendAnswer modifies it
+    const toSend = [...queue];
+    for (const trackId of toSend) {
+      await sendAnswer(trackId);
     }
-
-    localStorage.setItem(STORAGE_KEY + '_queue', JSON.stringify(remaining));
   }
 
   /* Try to flush queue now, and whenever we come back online */
   function init() {
     if (!ENDPOINT) return;
 
-    // Flush on load if online
     if (navigator.onLine) {
       setTimeout(flushQueue, 2000);
     }
 
-    // Flush when connectivity returns
     window.addEventListener('online', () => {
       setTimeout(flushQueue, 1000);
     });
