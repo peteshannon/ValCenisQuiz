@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Val Cenis — Question</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="header">
+    <div class="brand">Val Cenis</div>
+    <div id="team-name" class="team-name"></div>
+    <div class="round-indicator">
+      <span id="round-info"></span> — <span id="track-info"></span>
+    </div>
+  </div>
+
+  <div class="card text-center">
+    <!-- Play Button -->
+    <button id="btn-play" class="btn btn-play" aria-label="Play">▶</button>
+    <audio id="audio-player" preload="auto"></audio>
+
+    <!-- Answer Fields -->
+    <div style="text-align:left; margin-top:20px;">
+      <label for="input-artist">Artist</label>
+      <input type="text" id="input-artist" class="input-field" placeholder="Artist name..." autocomplete="off">
+
+      <label for="input-song">Song Title</label>
+      <input type="text" id="input-song" class="input-field" placeholder="Song title..." autocomplete="off">
+    </div>
+
+    <!-- Submit -->
+    <button id="btn-submit" class="btn btn-primary mt-16">Submit Answer</button>
+    <div id="submit-status"></div>
+
+    <!-- Navigation -->
+    <div class="nav-row">
+      <a id="btn-prev" class="btn btn-nav" href="#">← Previous</a>
+      <a id="btn-next" class="btn btn-nav" href="#">Next →</a>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/question.js"></script>
+</body>
+</html>

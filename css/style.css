@@ -1,0 +1,199 @@
+/* ============================================
+   Val Cenis Music Quiz — Global Styles
+   Mobile-first, mascot-card aesthetic
+   ============================================ */
+
+/* --- Custom Properties --- */
+:root {
+  --color-bg: #FDF6EC;
+  --color-surface: #FFFFFF;
+  --color-text: #2C2C2C;
+  --color-text-muted: #6B6B6B;
+  --color-primary: #4A6FA5;
+  --color-primary-hover: #3B5D8C;
+  --color-accent: #E8A44A;
+  --color-success: #5AAE6D;
+  --color-error: #D35D5D;
+  --color-border: #E8E0D4;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 4px 24px rgba(0,0,0,0.12);
+  --touch-min: 48px;
+  --font-main: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --transition: 0.2s ease;
+}
+
+/* --- Reset --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-main);
+  background: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  line-height: 1.5;
+}
+
+/* --- Card Panel --- */
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px 20px;
+  width: 100%;
+  max-width: 420px;
+  margin-bottom: 16px;
+}
+
+/* --- Typography --- */
+h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
+h2 { font-size: 1.2rem; font-weight: 600; margin-bottom: 6px; }
+p  { margin-bottom: 12px; color: var(--color-text-muted); }
+
+.text-center { text-align: center; }
+.brand { color: var(--color-primary); font-weight: 700; letter-spacing: 0.5px; }
+.team-name { color: var(--color-accent); font-weight: 600; }
+
+/* --- Buttons --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--touch-min);
+  padding: 12px 28px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+  width: 100%;
+  text-decoration: none;
+  color: #fff;
+}
+.btn:active { transform: scale(0.97); }
+
+.btn-primary { background: var(--color-primary); }
+.btn-primary:hover { background: var(--color-primary-hover); }
+
+.btn-accent { background: var(--color-accent); }
+.btn-success { background: var(--color-success); }
+
+.btn-play {
+  background: var(--color-accent);
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  font-size: 2.5rem;
+  padding: 0;
+  box-shadow: var(--shadow-lg);
+  margin: 16px auto;
+  display: flex;
+}
+
+.btn-nav {
+  background: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-border);
+  min-height: 44px;
+  padding: 10px 20px;
+  font-size: 1rem;
+}
+
+.btn[disabled] { opacity: 0.5; pointer-events: none; }
+
+/* --- Inputs --- */
+.input-field {
+  width: 100%;
+  min-height: var(--touch-min);
+  padding: 12px 16px;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  font-family: var(--font-main);
+  background: var(--color-bg);
+  color: var(--color-text);
+  transition: border-color var(--transition);
+  margin-bottom: 12px;
+}
+.input-field:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: 4px;
+}
+
+/* --- Progress Bar --- */
+.progress-wrap {
+  width: 100%;
+  height: 12px;
+  background: var(--color-border);
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 16px 0;
+}
+.progress-bar {
+  height: 100%;
+  background: var(--color-success);
+  border-radius: 6px;
+  width: 0%;
+  transition: width 0.4s ease;
+}
+
+/* --- Header --- */
+.header {
+  text-align: center;
+  padding: 12px 0;
+  width: 100%;
+  max-width: 420px;
+}
+.header .brand { font-size: 1.3rem; }
+.header .round-indicator {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+/* --- Navigation Row --- */
+.nav-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+.nav-row .btn-nav { flex: 1; }
+
+/* --- Status messages --- */
+.status {
+  text-align: center;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  margin: 12px 0;
+}
+.status-success { background: #E8F5E9; color: var(--color-success); }
+.status-error { background: #FDECEA; color: var(--color-error); }
+
+/* --- Utilities --- */
+.hidden { display: none !important; }
+.mb-8 { margin-bottom: 8px; }
+.mb-16 { margin-bottom: 16px; }
+.mt-16 { margin-top: 16px; }
+
+/* --- Audio element (hidden native controls) --- */
+audio { display: none; }
