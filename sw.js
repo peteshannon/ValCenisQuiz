@@ -3,7 +3,7 @@
    Caches all pages, CSS, JS, and audio
    ============================================ */
 
-const CACHE_NAME = 'vcquiz-v2';
+const CACHE_NAME = 'vcquiz-v3';
 
 /* Base path — auto-detect from SW scope */
 const BASE = self.registration.scope;
@@ -42,40 +42,52 @@ self.addEventListener('activate', (e) => {
   );
 });
 
-/* Fetch — cache-first, then network */
+/* Fetch strategy:
+   - Audio files: cache-first (large, rarely change)
+   - Everything else: network-first (so updates deploy immediately) */
 self.addEventListener('fetch', (e) => {
-  // Skip non-GET requests
   if (e.request.method !== 'GET') return;
 
-  e.respondWith(
-    caches.match(e.request).then(cached => {
-      if (cached) return cached;
+  const url = e.request.url;
 
-      return fetch(e.request).then(response => {
-        // Cache new audio files and other assets on first fetch
-        if (response.ok && shouldCache(e.request.url)) {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(e.request, clone));
+  if (isAudioFile(url)) {
+    // Cache-first for audio
+    e.respondWith(
+      caches.match(e.request).then(cached => {
+        if (cached) return cached;
+        return fetch(e.request).then(resp => {
+          if (resp.ok) {
+            const clone = resp.clone();
+            caches.open(CACHE_NAME).then(c => c.put(e.request, clone));
+          }
+          return resp;
+        });
+      }).catch(() => caches.match(e.request))
+    );
+  } else {
+    // Network-first for pages, CSS, JS
+    e.respondWith(
+      fetch(e.request).then(resp => {
+        if (resp.ok) {
+          const clone = resp.clone();
+          caches.open(CACHE_NAME).then(c => c.put(e.request, clone));
         }
-        return response;
-      });
-    }).catch(() => {
-      // Offline fallback — return cached index if available
-      if (e.request.mode === 'navigate') {
-        return caches.match(BASE + 'index.html');
-      }
-    })
-  );
+        return resp;
+      }).catch(() => {
+        return caches.match(e.request).then(cached => {
+          if (cached) return cached;
+          if (e.request.mode === 'navigate') {
+            return caches.match(BASE + 'index.html');
+          }
+        });
+      })
+    );
+  }
 });
 
-/* Determine if a request should be cached */
-function shouldCache(url) {
-  return url.endsWith('.html') ||
-         url.endsWith('.css') ||
-         url.endsWith('.js') ||
-         url.endsWith('.mp3') ||
-         url.endsWith('.wav') ||
-         url.endsWith('.ogg');
+/* Check if URL is an audio file */
+function isAudioFile(url) {
+  return url.endsWith('.mp3') || url.endsWith('.wav') || url.endsWith('.ogg');
 }
 
 /* Message handler — preload audio files on demand */
