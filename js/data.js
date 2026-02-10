@@ -63,6 +63,10 @@ const QUIZ_DATA = {
     answersReveal: '251231',
   },
 
+  /* Google Apps Script endpoint for results (set to null until configured) */
+  submitEndpoint: null,
+  // submitEndpoint: 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec',
+
   /* Pages to cache for offline (relative paths — SW resolves from its scope) */
   cachePages: [
     'index.html',

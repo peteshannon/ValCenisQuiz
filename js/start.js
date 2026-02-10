@@ -1,6 +1,6 @@
 /* ============================================
-   Preload Page Logic
-   Caches all audio assets via Service Worker
+   Team Start Page Logic
+   Sets team identity, runs preload, redirects
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -9,6 +9,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const statusEl = document.getElementById('preload-status');
   const startBtn = document.getElementById('btn-start-preload');
   const doneSection = document.getElementById('preload-done');
+  const teamNameEl = document.getElementById('team-name');
+  const mascotEl = document.getElementById('mascot-emoji');
+
+  // Detect and persist team from URL
+  const teamId = App.detectTeamFromURL();
+  if (teamId) {
+    App.setTeam(teamId);
+  }
+
+  // Show team info
+  const team = App.getTeamInfo();
+  if (team) {
+    teamNameEl.textContent = team.name;
+    mascotEl.textContent = team.mascotEmoji;
+    document.getElementById('mascot-name').textContent = 'Assisted by ' + team.mascot;
+  }
 
   // Check if already preloaded
   if (App.isPreloaded()) {
@@ -22,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   async function preloadAssets() {
-    // Collect all audio URLs
     const audioUrls = [];
     QUIZ_DATA.rounds.forEach(round => {
       round.tracks.forEach(track => {
@@ -35,12 +50,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     progressText.textContent = `Loading: 0 / ${total}`;
 
-    // Load audio files one by one so we can track progress
     for (const url of audioUrls) {
       try {
         const resp = await fetch(url);
         if (resp.ok) {
-          // Put into cache via Cache API directly
           const cache = await caches.open('vcquiz-v4');
           await cache.put(url, resp);
         }
@@ -54,16 +67,12 @@ document.addEventListener('DOMContentLoaded', () => {
       progressText.textContent = `Loading: ${loaded} / ${total}`;
     }
 
-    // Mark complete
     App.setPreloadComplete();
     showComplete();
   }
 
   function showComplete() {
-    statusEl.innerHTML = `
-      <div class="status status-success">
-        All set. This phone is ready for the quiz!
-      </div>`;
+    statusEl.innerHTML = '<div class="status status-success">All set! This phone is ready for the quiz.</div>';
     progressBar.style.width = '100%';
     progressText.textContent = 'Complete';
     doneSection.classList.remove('hidden');

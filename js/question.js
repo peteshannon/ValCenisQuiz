@@ -87,6 +87,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     App.queueSubmission(track.id);
 
+    // Try to submit immediately, flush queue for any pending
+    if (typeof Submit !== 'undefined') {
+      Submit.sendAnswer(track.id).then(() => Submit.flushQueue());
+    }
+
     submitStatus.textContent = 'Saved!';
     submitStatus.className = 'status status-success';
     setTimeout(() => { submitStatus.textContent = ''; submitStatus.className = ''; }, 2000);

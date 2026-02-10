@@ -16,12 +16,12 @@ const App = (() => {
 
   function setTeam(teamId) {
     if (teamId && QUIZ_DATA.teams[teamId]) {
-      sessionStorage.setItem('vcquiz_team', teamId);
+      localStorage.setItem(STORAGE_KEY + '_team', teamId);
     }
   }
 
   function getTeam() {
-    return sessionStorage.getItem('vcquiz_team');
+    return localStorage.getItem(STORAGE_KEY + '_team');
   }
 
   function getTeamInfo() {
