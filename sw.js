@@ -5,20 +5,23 @@
 
 const CACHE_NAME = 'vcquiz-v1';
 
-/* Core assets cached on install */
+/* Base path — auto-detect from SW scope */
+const BASE = self.registration.scope;
+
+/* Core assets cached on install (relative to scope) */
 const CORE_ASSETS = [
-  '/',
-  '/index.html',
-  '/holding.html',
-  '/unlock.html',
-  '/instructions.html',
-  '/question.html',
-  '/css/style.css',
-  '/js/app.js',
-  '/js/data.js',
-  '/js/preload.js',
-  '/js/question.js',
-];
+  '',
+  'index.html',
+  'holding.html',
+  'unlock.html',
+  'instructions.html',
+  'question.html',
+  'css/style.css',
+  'js/app.js',
+  'js/data.js',
+  'js/preload.js',
+  'js/question.js',
+].map(p => BASE + p);
 
 /* Install — cache core assets */
 self.addEventListener('install', (e) => {
@@ -58,7 +61,7 @@ self.addEventListener('fetch', (e) => {
     }).catch(() => {
       // Offline fallback — return cached index if available
       if (e.request.mode === 'navigate') {
-        return caches.match('/index.html');
+        return caches.match(BASE + 'index.html');
       }
     })
   );

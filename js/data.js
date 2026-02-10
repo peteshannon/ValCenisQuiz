@@ -63,18 +63,17 @@ const QUIZ_DATA = {
     answersReveal: 'REVEALTIME',
   },
 
-  /* Pages to cache for offline */
+  /* Pages to cache for offline (relative paths — SW resolves from its scope) */
   cachePages: [
-    '/',
-    '/index.html',
-    '/holding.html',
-    '/unlock.html',
-    '/instructions.html',
-    '/question.html',
-    '/css/style.css',
-    '/js/app.js',
-    '/js/data.js',
-    '/js/preload.js',
-    '/js/question.js',
+    'index.html',
+    'holding.html',
+    'unlock.html',
+    'instructions.html',
+    'question.html',
+    'css/style.css',
+    'js/app.js',
+    'js/data.js',
+    'js/preload.js',
+    'js/question.js',
   ]
 };

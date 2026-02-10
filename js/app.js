@@ -82,7 +82,8 @@ const App = (() => {
   /* --- Service Worker Registration --- */
   function registerSW() {
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js').catch(err => {
+      const swPath = new URL('sw.js', document.baseURI).href;
+      navigator.serviceWorker.register(swPath).catch(err => {
         console.warn('SW registration failed:', err);
       });
     }

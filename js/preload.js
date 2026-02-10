@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const audioUrls = [];
     QUIZ_DATA.rounds.forEach(round => {
       round.tracks.forEach(track => {
-        audioUrls.push(new URL(track.audio, window.location.origin).href);
+        audioUrls.push(new URL(track.audio, document.baseURI).href);
       });
     });
 
