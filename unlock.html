@@ -15,8 +15,9 @@
     <h1>Something awaits...</h1>
     <p>Enter the secret code to begin.</p>
 
-    <input type="text" id="input-code" class="input-field" placeholder="Enter code..."
-           autocomplete="off" autocapitalize="characters" style="text-align:center; font-size:1.3rem; letter-spacing:2px;">
+    <input type="tel" id="input-code" class="input-field" placeholder="● ● ● ● ● ●"
+           maxlength="6" inputmode="numeric" pattern="[0-9]*"
+           autocomplete="off" style="text-align:center; font-size:1.5rem; letter-spacing:6px;">
 
     <div id="unlock-feedback" class="mb-16"></div>
 

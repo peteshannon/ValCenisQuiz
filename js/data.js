@@ -59,8 +59,8 @@ const QUIZ_DATA = {
 
   /* Unlock codes */
   unlockCodes: {
-    quizStart: 'VALCENIS',
-    answersReveal: 'REVEALTIME',
+    quizStart: '241205',
+    answersReveal: '251231',
   },
 
   /* Pages to cache for offline (relative paths — SW resolves from its scope) */

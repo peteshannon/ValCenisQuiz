@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function tryUnlock() {
-    const code = input.value.trim().toUpperCase();
+    const code = input.value.trim();
 
     if (code === QUIZ_DATA.unlockCodes.quizStart) {
       // Success
