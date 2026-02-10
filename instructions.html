@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Val Cenis — How to Play</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="header">
+    <div class="brand">Val Cenis Quiz</div>
+    <div id="team-name" class="team-name"></div>
+  </div>
+
+  <div class="card">
+    <h1 class="text-center">How to Play</h1>
+
+    <div class="instruction-item">
+      <span class="instruction-icon">🎵</span>
+      <p>One track per page. Tap the big <strong>Play</strong> button to hear it.</p>
+    </div>
+
+    <div class="instruction-item">
+      <span class="instruction-icon">⏱️</span>
+      <p>Your timer starts when you first press <strong>Play</strong> and stops when you first hit <strong>Submit</strong>.</p>
+    </div>
+
+    <div class="instruction-item">
+      <span class="instruction-icon">✏️</span>
+      <p>Write the <strong>Artist</strong> and <strong>Song Title</strong> on each page.</p>
+    </div>
+
+    <div class="instruction-item">
+      <span class="instruction-icon">🔄</span>
+      <p>You can replay, go back, and edit answers — but your original time always counts.</p>
+    </div>
+
+    <div class="instruction-item">
+      <span class="instruction-icon">📶</span>
+      <p>No internet needed — everything works offline!</p>
+    </div>
+
+    <a href="question.html?r=0&t=0" id="btn-go" class="btn btn-accent mt-16">Let's Go!</a>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    // Show team name if set
+    const team = App.getTeamInfo();
+    if (team) {
+      document.getElementById('team-name').textContent =
+        team.name + ' — assisted by ' + team.mascot + ' ' + team.mascotEmoji;
+    }
+  </script>
+</body>
+</html>

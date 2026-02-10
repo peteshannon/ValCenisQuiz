@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Val Cenis — Unlock</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="header">
+    <div class="brand">Val Cenis</div>
+  </div>
+
+  <div class="card text-center">
+    <h1>Something awaits...</h1>
+    <p>Enter the secret code to begin.</p>
+
+    <input type="text" id="input-code" class="input-field" placeholder="Enter code..."
+           autocomplete="off" autocapitalize="characters" style="text-align:center; font-size:1.3rem; letter-spacing:2px;">
+
+    <div id="unlock-feedback" class="mb-16"></div>
+
+    <button id="btn-unlock" class="btn btn-primary">Unlock</button>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/unlock.js"></script>
+</body>
+</html>
