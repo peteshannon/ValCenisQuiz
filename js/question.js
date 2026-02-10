@@ -117,6 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
     nextBtn.textContent = 'Next Round →';
   } else {
     nextBtn.textContent = 'Finish →';
-    nextBtn.href = 'holding.html'; // TODO: final unlock page
+    nextBtn.href = 'final-unlock.html';
   }
 });

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Val Cenis — Quiz Complete</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="header">
+    <div class="brand">Val Cenis Quiz</div>
+    <div id="team-name" class="team-name"></div>
+  </div>
+
+  <div class="card text-center">
+    <div style="font-size:3rem; margin-bottom:8px;">🎉</div>
+    <h1>Quiz Complete!</h1>
+    <p>Well done! All your answers have been saved.</p>
+    <p>When you're ready to reveal the answers, enter the code below.</p>
+
+    <input type="tel" id="input-code" class="input-field" placeholder="● ● ● ● ● ●"
+           maxlength="6" inputmode="numeric" pattern="[0-9]*"
+           autocomplete="off" style="text-align:center; font-size:1.5rem; letter-spacing:6px;">
+
+    <div id="unlock-feedback" class="mb-16"></div>
+
+    <button id="btn-unlock" class="btn btn-accent">Reveal Answers</button>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    // Show team info
+    const team = App.getTeamInfo();
+    if (team) {
+      document.getElementById('team-name').textContent =
+        team.name + ' — ' + team.mascot + ' ' + team.mascotEmoji;
+    }
+
+    const input = document.getElementById('input-code');
+    const btn = document.getElementById('btn-unlock');
+    const feedback = document.getElementById('unlock-feedback');
+
+    btn.addEventListener('click', tryUnlock);
+    input.addEventListener('keydown', (e) => { if (e.key === 'Enter') tryUnlock(); });
+
+    function tryUnlock() {
+      const code = input.value.trim();
+      if (code === QUIZ_DATA.unlockCodes.answersReveal) {
+        feedback.innerHTML = '<div class="status status-success">Let\'s see how you did!</div>';
+        btn.disabled = true;
+        input.disabled = true;
+        setTimeout(() => { window.location.href = 'answers.html'; }, 1200);
+      } else if (code === '') {
+        feedback.innerHTML = '<div class="status status-error">Please enter a code.</div>';
+      } else {
+        feedback.innerHTML = '<div class="status status-error">Not yet! Try again.</div>';
+        input.value = '';
+        input.focus();
+      }
+    }
+  </script>
+</body>
+</html>

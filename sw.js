@@ -3,7 +3,7 @@
    Caches all pages, CSS, JS, and audio
    ============================================ */
 
-const CACHE_NAME = 'vcquiz-v4';
+const CACHE_NAME = 'vcquiz-v5';
 
 /* Base path — auto-detect from SW scope */
 const BASE = self.registration.scope;
@@ -28,6 +28,9 @@ const CORE_ASSETS = [
   'start-shannon.html',
   'start-james.html',
   'start-medcalf.html',
+  'final-unlock.html',
+  'answers.html',
+  'js/answers.js',
 ].map(p => BASE + p);
 
 /* Install — cache core assets */

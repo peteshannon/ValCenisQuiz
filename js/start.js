@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
         const resp = await fetch(url);
         if (resp.ok) {
-          const cache = await caches.open('vcquiz-v4');
+          const cache = await caches.open('vcquiz-v5');
           await cache.put(url, resp);
         }
       } catch (err) {

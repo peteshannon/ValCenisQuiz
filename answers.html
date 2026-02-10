@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Val Cenis — Answers Revealed</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .reveal-card {
+      background: var(--color-surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      padding: 24px 20px;
+      width: 100%;
+      max-width: 420px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .answer-correct {
+      background: #E8F5E9;
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      margin: 12px 0;
+    }
+    .answer-correct .label { font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 2px; }
+    .answer-correct .value { font-size: 1.1rem; font-weight: 700; color: var(--color-text); }
+
+    .answer-yours {
+      background: var(--color-bg);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      margin: 8px 0;
+    }
+    .answer-yours .label { font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 2px; }
+    .answer-yours .value { font-size: 1rem; color: var(--color-text); }
+
+    .track-counter {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      margin-bottom: 8px;
+    }
+    .round-banner {
+      font-size: 0.9rem;
+      color: var(--color-primary);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .progress-track {
+      height: 4px;
+      background: var(--color-border);
+      border-radius: 2px;
+      margin: 12px 0;
+      overflow: hidden;
+    }
+    .progress-track-fill {
+      height: 100%;
+      background: var(--color-accent);
+      border-radius: 2px;
+      width: 0%;
+      transition: width 0.3s linear;
+    }
+    .waiting-msg {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="brand">Val Cenis Quiz</div>
+    <div id="team-name" class="team-name"></div>
+  </div>
+
+  <!-- Pre-reveal state -->
+  <div id="state-ready" class="reveal-card">
+    <div style="font-size:3rem; margin-bottom:8px;">🎶</div>
+    <h1>Answers Time!</h1>
+    <p>Each track will play, then the correct answer is revealed.</p>
+    <button id="btn-start" class="btn btn-accent">Reveal First Answer</button>
+  </div>
+
+  <!-- Playing / reveal state -->
+  <div id="state-playing" class="reveal-card hidden">
+    <div class="round-banner" id="round-title"></div>
+    <div class="track-counter" id="track-counter"></div>
+
+    <button id="btn-play-reveal" class="btn btn-play" aria-label="Play">▶</button>
+    <audio id="audio-player" preload="auto"></audio>
+
+    <div class="progress-track">
+      <div class="progress-track-fill" id="audio-progress"></div>
+    </div>
+
+    <div id="answer-area" class="hidden">
+      <div class="answer-correct">
+        <div class="label">Correct Answer</div>
+        <div class="value" id="correct-artist"></div>
+        <div class="value" id="correct-song"></div>
+      </div>
+      <div class="answer-yours">
+        <div class="label">Your Answer</div>
+        <div class="value" id="your-artist"></div>
+        <div class="value" id="your-song"></div>
+      </div>
+    </div>
+
+    <p id="waiting-msg" class="waiting-msg">Listen to the track...</p>
+
+    <button id="btn-next-reveal" class="btn btn-primary mt-16 hidden">Next Track</button>
+  </div>
+
+  <!-- Finished state -->
+  <div id="state-done" class="reveal-card hidden">
+    <div style="font-size:3rem; margin-bottom:8px;">🏆</div>
+    <h1>That's a Wrap!</h1>
+    <p>Hope you enjoyed the Val Cenis Music Quiz!</p>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/answers.js"></script>
+</body>
+</html>
