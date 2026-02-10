@@ -1,15 +1,15 @@
 # NOW — Current Work Context
 
 **Last Updated:** February 2026
-**Session:** 1 (Project Setup)
+**Session:** 2 (Core Infrastructure)
 **Branch:** `main`
 
 ---
 
 ## Active Work
 
-**Status:** Project initialised, ready for first implementation task
-**Priority:** Build core infrastructure (service worker, preload, question template)
+**Status:** Core infrastructure built — project structure, SW, preload, question template all in place
+**Priority:** Build remaining pages (unlock, instructions, round transitions, answers-revealed)
 **Spec:** `docs/SPEC.md`
 
 ---
@@ -25,18 +25,24 @@ Three teams, offline-capable, GitHub Pages hosted. Plain HTML/CSS/JS only.
 
 ---
 
-## Recent Context
+## What's Built
 
-**Session 1:** Project structure created. No code yet.
+- `css/style.css` — Mobile-first base styles, mascot-card aesthetic
+- `js/data.js` — Quiz data (3 rounds, teams, unlock codes)
+- `js/app.js` — Team identity, answer storage, timing helpers
+- `sw.js` — Cache-first Service Worker with audio preload
+- `index.html` + `js/preload.js` — Setup/preload page with progress
+- `question.html` + `js/question.js` — Question template (audio, timing, nav)
+- `holding.html` — Calm post-setup waiting page
 
----
+## What's Next
 
-## Team Agents Available
-
-- **Uma** (UX Designer) — `ops/agents/ux-designer.md`
-- **Quinn** (QA Strategist) — `ops/agents/qa-strategist.md`
-- **Tess** (Technical Writer) — `ops/agents/technical-writer.md`
-- **Archie** (Architect) — `ops/agents/architect.md`
+- Unlock page (code entry)
+- Instructions page
+- Team entry pages (`start-shannon.html`, etc.)
+- Round transition pages
+- Final unlock + answers-revealed mode
+- Actual audio files
 
 ---
 
