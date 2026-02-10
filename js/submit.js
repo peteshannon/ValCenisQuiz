@@ -31,12 +31,25 @@ const Submit = (() => {
     localStorage.setItem(STORAGE_KEY + '_queue', JSON.stringify(updated));
   }
 
+  /* Look up a track by ID from quiz data */
+  function findTrack(trackId) {
+    for (const round of QUIZ_DATA.rounds) {
+      for (const track of round.tracks) {
+        if (track.id === trackId) return track;
+      }
+    }
+    return null;
+  }
+
   /* Send a single answer to the Google Sheet */
   async function sendAnswer(trackId) {
     if (!ENDPOINT) return false;
 
     const answer = App.getAnswer(trackId);
     if (!answer) return false;
+
+    // Look up correct answer from quiz data
+    const correct = findTrack(trackId);
 
     try {
       const resp = await fetch(ENDPOINT, {
@@ -47,6 +60,8 @@ const Submit = (() => {
           trackId: trackId,
           artist: answer.artist,
           song: answer.song,
+          correctArtist: correct ? correct.artist : '',
+          correctSong: correct ? correct.song : '',
           firstPlayTime: formatTime(answer.firstPlayTime),
           firstSubmitTime: formatTime(answer.firstSubmitTime),
           duration: formatDuration(answer.duration),
