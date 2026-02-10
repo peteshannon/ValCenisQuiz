@@ -51,10 +51,16 @@ document.addEventListener('DOMContentLoaded', () => {
   let firstPlayTime = existing?.firstPlayTime || null;
   let firstSubmitTime = existing?.firstSubmitTime || null;
 
+  // --- Disable Submit until Play has been pressed (unless returning to answered question) ---
+  if (!firstPlayTime) {
+    submitBtn.disabled = true;
+  }
+
   // --- Play Button (toggle play/pause) ---
   playBtn.addEventListener('click', () => {
     if (!firstPlayTime) {
       firstPlayTime = Date.now();
+      submitBtn.disabled = false;
     }
     if (audioEl.paused) {
       audioEl.play();
