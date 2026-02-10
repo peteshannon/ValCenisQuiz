@@ -108,8 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (trackIdx < round.tracks.length - 1) {
     nextBtn.href = App.getTrackLocation(roundIdx, trackIdx + 1);
   } else if (roundIdx < QUIZ_DATA.rounds.length - 1) {
-    // TODO: round transition page
-    nextBtn.href = App.getTrackLocation(roundIdx + 1, 0);
+    nextBtn.href = 'round-intro.html?r=' + (roundIdx + 1);
     nextBtn.textContent = 'Next Round →';
   } else {
     nextBtn.textContent = 'Finish →';

@@ -22,6 +22,7 @@ const CORE_ASSETS = [
   'js/preload.js',
   'js/question.js',
   'js/unlock.js',
+  'round-intro.html',
 ].map(p => BASE + p);
 
 /* Install — cache core assets */

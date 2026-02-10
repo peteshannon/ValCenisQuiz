@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Val Cenis — Next Round</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="header">
+    <div class="brand">Val Cenis Quiz</div>
+    <div id="team-name" class="team-name"></div>
+  </div>
+
+  <div class="card text-center" style="margin-top:24px;">
+    <p id="round-label" style="font-size:0.9rem; color:var(--color-text-muted); margin-bottom:4px;"></p>
+    <h1 id="round-title" style="font-size:1.8rem; margin-bottom:12px;"></h1>
+    <p id="round-desc" style="font-size:1.1rem;"></p>
+    <p id="round-count" style="font-size:0.9rem; color:var(--color-text-muted);"></p>
+
+    <a id="btn-go" class="btn btn-accent mt-16" href="#">Let's Go!</a>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const roundIdx = parseInt(params.get('r'), 10) || 0;
+    const round = QUIZ_DATA.rounds[roundIdx];
+
+    if (!round) { window.location.href = 'holding.html'; }
+
+    document.getElementById('round-label').textContent = 'Round ' + (roundIdx + 1);
+    document.getElementById('round-title').textContent = round.title;
+    document.getElementById('round-desc').textContent = round.description;
+    document.getElementById('round-count').textContent = round.tracks.length + ' tracks';
+    document.getElementById('btn-go').href = App.getTrackLocation(roundIdx, 0);
+
+    const team = App.getTeamInfo();
+    if (team) {
+      document.getElementById('team-name').textContent =
+        team.name + ' — assisted by ' + team.mascot + ' ' + team.mascotEmoji;
+    }
+  </script>
+</body>
+</html>
