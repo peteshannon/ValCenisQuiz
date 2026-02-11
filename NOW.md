@@ -1,15 +1,15 @@
 # NOW — Current Work Context
 
 **Last Updated:** February 2026
-**Session:** 3 (Visual Design v2 — Collectible Card)
+**Session:** 4 (UI split & polish)
 **Branch:** `main`
 
 ---
 
 ## Active Work
 
-**Status:** Complete visual redesign v2 shipped — genuine collectible card aesthetic
-**Priority:** Pete to review on mobile, provide feedback
+**Status:** Split start pages into logo + setup pages to eliminate scrolling
+**Priority:** Pete to review the two-page start flow
 **Spec:** `docs/SPEC.md`
 
 ---
@@ -23,10 +23,10 @@ Three teams, offline-capable, GitHub Pages hosted. Plain HTML/CSS/JS only.
 
 ## What's Built
 
-- **Full quiz flow:** start → preload → holding → unlock → instructions → questions → round intros → final unlock → answers
-- **Team entry pages:** `start-shannon.html`, `start-james.html`, `start-medcalf.html`
+- **Full quiz flow:** start (logo) → setup (preload) → holding → unlock → instructions → questions → round intros → final unlock → answers
+- **Team entry pages:** `start-shannon.html` (logo), `setup-shannon.html` (mascot + preload), same for james/medcalf
 - **Results submission:** `js/submit.js` posts to Google Sheet with correct answers, timing, dedup
-- **Service Worker:** network-first for HTML/CSS/JS, cache-first for audio/images (v6)
+- **Service Worker:** network-first for HTML/CSS/JS, cache-first for audio/images (v9)
 - **Audio:** R1 (12 tracks) + R2 (5 tracks) clips and full-length tracks
 - **Answers:** all R1 + R2 answers populated in `js/data.js`
 - **Visual Design v2 (CURRENT):**
@@ -49,8 +49,6 @@ Three teams, offline-capable, GitHub Pages hosted. Plain HTML/CSS/JS only.
 
 ## What's Next
 
-- Pete to review v2 design on mobile
-- Round 3 audio + answers if applicable
 - QR code generation for team URLs
 - Any design polish after review
 
