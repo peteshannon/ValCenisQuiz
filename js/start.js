@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function showComplete() {
-    statusEl.innerHTML = '<div class="status status-success">All set! Ready for the road.</div>';
+    statusEl.innerHTML = '<div class="status status-success">All set. Ready to go!</div>';
     progressBar.style.width = '100%';
     progressText.textContent = 'Complete';
     doneSection.classList.remove('hidden');

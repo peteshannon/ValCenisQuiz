@@ -347,7 +347,7 @@ p {
 
 /* Logo image replaces text brand */
 .logo-header {
-  width: 120px;
+  width: 200px;
   height: auto;
   display: block;
   margin: 0 auto 2px;
@@ -812,7 +812,7 @@ p {
    LOGO (card-back crossed skis)
    ============================================ */
 .logo-img {
-  width: 140px;
+  width: 200px;
   height: auto;
   margin: 0 auto 8px;
   display: block;

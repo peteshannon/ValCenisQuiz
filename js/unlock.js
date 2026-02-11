@@ -17,14 +17,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const code = input.value.trim();
 
     if (code === QUIZ_DATA.unlockCodes.quizStart) {
-      // Success
-      feedback.innerHTML = '<div class="status status-success">Welcome to the Val Cenis Quiz!</div>';
+      // Success — redirect immediately
       btn.disabled = true;
       input.disabled = true;
-
-      setTimeout(() => {
-        window.location.href = 'instructions.html';
-      }, 1200);
+      window.location.href = 'instructions.html';
     } else if (code === '') {
       feedback.innerHTML = '<div class="status status-error">Please enter a code.</div>';
     } else {
