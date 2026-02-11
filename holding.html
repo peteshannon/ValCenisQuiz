@@ -10,23 +10,22 @@
   <div class="holding-container">
 
     <div class="card-back">
-      <div class="card-back-inner" style="padding:16px 18px;">
+      <div class="card-back-inner" style="padding:20px 18px;">
         <div class="snowflakes">❄ ❄ ❄ ❄ ❄</div>
 
-        <img class="logo-img" src="images/SimpleLogo_ValCenis.png" alt="Val Cenis Road Trip">
+        <h1 style="font-size:1.6rem; margin:8px 0 4px;">Ready?</h1>
 
-        <div id="mascot-area" class="hidden">
-          <img id="mascot-character" class="mascot-character-sm" src="" alt="">
-          <span id="team-badge" class="team-badge" style="display:inline-flex; margin-top:6px;">
-            <span id="team-name"></span>
-          </span>
-        </div>
+        <p style="font-size:0.95rem; color:var(--color-text); margin:8px 0; line-height:1.5;">
+          Open the envelope and solve the puzzles to discover the <strong>6-digit code</strong>.
+        </p>
+
+        <p style="font-size:0.85rem; color:var(--color-muted); margin:4px 0 12px; line-height:1.4;">
+          The clock starts when you tap the button below. Good luck!
+        </p>
 
         <div class="snowflakes">❄ ❄ ❄ ❄ ❄</div>
 
-        <p style="font-size:0.95rem; color:var(--color-text); margin:4px 0;">Keep this page open.</p>
-
-        <a href="unlock.html" class="btn btn-primary" style="margin-top:8px;">I have a code</a>
+        <button id="btn-start-clock" class="btn btn-primary" style="margin-top:10px;">Start the Clock</button>
       </div>
     </div>
 
@@ -37,13 +36,11 @@
   <script>
     App.registerSW();
     App.applyTeamTheme();
-    const team = App.getTeamInfo();
-    if (team) {
-      document.getElementById('mascot-area').classList.remove('hidden');
-      document.getElementById('mascot-character').src = team.mascotOnly;
-      document.getElementById('mascot-character').alt = team.mascot;
-      document.getElementById('team-name').textContent = team.name;
-    }
+
+    document.getElementById('btn-start-clock').addEventListener('click', () => {
+      localStorage.setItem('vcquiz_clock_start', Date.now().toString());
+      window.location.href = 'unlock.html';
+    });
   </script>
 </body>
 </html>
