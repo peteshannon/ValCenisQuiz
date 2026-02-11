@@ -13,13 +13,13 @@
       <div class="card-back-inner">
         <div class="snowflakes">❄ ❄ ❄ ❄ ❄</div>
 
-        <img class="logo-img" src="images/card-back.png" alt="Val Cenis Road Trip">
+        <img class="logo-img" src="images/SimpleLogo_ValCenis.png" alt="Val Cenis Road Trip">
 
         <p class="catchphrase" style="margin-top:8px;">Official Mascot Cards</p>
 
-        <div id="team-badge-wrap" class="hidden mt-12 mb-12">
-          <span id="team-badge" class="team-badge">
-            <img id="mascot-img" class="team-badge-img" src="" alt="">
+        <div id="mascot-area" class="hidden mt-8 mb-8">
+          <img id="mascot-character" class="mascot-character-sm" src="" alt="">
+          <span id="team-badge" class="team-badge mt-8" style="display:inline-flex;">
             <span id="team-name"></span>
           </span>
         </div>
@@ -41,9 +41,9 @@
     App.applyTeamTheme();
     const team = App.getTeamInfo();
     if (team) {
-      document.getElementById('team-badge-wrap').classList.remove('hidden');
-      document.getElementById('mascot-img').src = team.mascotImg;
-      document.getElementById('mascot-img').alt = team.mascot;
+      document.getElementById('mascot-area').classList.remove('hidden');
+      document.getElementById('mascot-character').src = team.mascotOnly;
+      document.getElementById('mascot-character').alt = team.mascot;
       document.getElementById('team-name').textContent = team.name;
     }
   </script>

@@ -8,7 +8,7 @@
 </head>
 <body>
   <div class="header">
-    <div class="brand">Val Cenis Road Trip</div>
+    <img class="logo-header" src="images/SimpleLogo_ValCenis.png" alt="Val Cenis Road Trip">
     <div id="team-badge-wrap" class="hidden">
       <span id="team-badge" class="team-badge">
         <img id="mascot-img" class="team-badge-img" src="" alt="">
@@ -21,7 +21,7 @@
     <div class="ribbon">How to Play</div>
 
     <div class="card-inner">
-      <p class="catchphrase text-center">"Listen carefully. Answer quickly. Have fun."</p>
+      <p class="catchphrase text-center">It's a race against the clock!</p>
 
       <div class="stat-divider">
         <span class="stat-divider-label">Rules</span>
@@ -29,27 +29,17 @@
 
       <div class="instruction-item">
         <span class="instruction-icon">🎵</span>
-        <p>One track per page. Tap the big <strong>Play</strong> button to hear it.</p>
+        <p>Tap <strong>Play</strong>, listen, then type the <strong>Artist</strong> and <strong>Song</strong>.</p>
       </div>
 
       <div class="instruction-item">
         <span class="instruction-icon">⏱️</span>
-        <p>Your timer starts on <strong>Play</strong> and stops on your first <strong>Submit</strong>.</p>
-      </div>
-
-      <div class="instruction-item">
-        <span class="instruction-icon">✏️</span>
-        <p>Write the <strong>Artist</strong> and <strong>Song Title</strong>.</p>
+        <p>Your timer starts on <strong>Play</strong> and stops on <strong>Submit</strong>. Be fast!</p>
       </div>
 
       <div class="instruction-item">
         <span class="instruction-icon">🔄</span>
-        <p>You can replay, go back, and edit — but your original time always counts.</p>
-      </div>
-
-      <div class="instruction-item">
-        <span class="instruction-icon">📶</span>
-        <p>No internet needed — everything works offline!</p>
+        <p>You can go back and change answers, but your original time always counts.</p>
       </div>
 
       <a href="question.html?r=0&t=0" id="btn-go" class="btn btn-accent mt-16">Let's Go!</a>
@@ -65,7 +55,7 @@
     const team = App.getTeamInfo();
     if (team) {
       document.getElementById('team-badge-wrap').classList.remove('hidden');
-      document.getElementById('mascot-img').src = team.mascotImg;
+      document.getElementById('mascot-img').src = team.mascotOnly;
       document.getElementById('team-name-badge').textContent = team.name;
     }
   </script>

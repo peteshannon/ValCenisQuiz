@@ -1,7 +1,7 @@
 /* ============================================
-   Answers Revealed — Playlist Mode
-   Plays each track, reveals correct answer,
-   shows team's answer, auto-progresses
+   Answers Revealed — Instant Playlist Mode
+   Plays each track while showing answers immediately.
+   User taps Next when ready to move on.
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -26,12 +26,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const roundRibbonEl = document.getElementById('round-ribbon');
   const roundTitleEl  = document.getElementById('round-title');
   const trackCounterEl = document.getElementById('track-counter');
-  const answerArea    = document.getElementById('answer-area');
   const correctArtist = document.getElementById('correct-artist');
   const correctSong   = document.getElementById('correct-song');
   const yourArtist    = document.getElementById('your-artist');
   const yourSong      = document.getElementById('your-song');
-  const waitingMsg    = document.getElementById('waiting-msg');
   const nextBtn       = document.getElementById('btn-next-reveal');
 
   // --- Team Badge ---
@@ -41,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (badgeWrap) {
       badgeWrap.classList.remove('hidden');
       const img = document.getElementById('mascot-img');
-      if (img) img.src = team.mascotImg;
+      if (img) img.src = team.mascotOnly;
       const nameEl = document.getElementById('team-name-badge');
       if (nameEl) nameEl.textContent = team.name;
     }
@@ -70,24 +68,35 @@ document.addEventListener('DOMContentLoaded', () => {
     roundTitleEl.textContent = track.roundTitle;
     trackCounterEl.textContent = 'Track ' + (idx + 1) + ' of ' + allTracks.length;
 
-    // Reset UI
-    answerArea.classList.add('hidden');
-    nextBtn.classList.add('hidden');
-    waitingMsg.classList.remove('hidden');
-    waitingMsg.textContent = 'Listen to the track...';
-    playBtn.textContent = '▶';
+    // Show answers immediately
+    correctArtist.textContent = track.artist || '—';
+    correctSong.textContent = track.song || '—';
+
+    const teamAnswer = App.getAnswer(track.id);
+    yourArtist.textContent = teamAnswer ? (teamAnswer.artist || '—') : 'No answer';
+    yourSong.textContent = teamAnswer ? (teamAnswer.song || '—') : 'No answer';
+
+    // Next button
+    if (currentIdx < allTracks.length - 1) {
+      nextBtn.textContent = 'Next Track';
+    } else {
+      nextBtn.textContent = 'Finish!';
+    }
+
+    // Reset play button
+    playBtn.classList.remove('is-playing');
     playBtn.disabled = false;
     audioProgress.style.width = '0%';
 
-    // Audio — use full track if available, fall back to quiz clip
+    // Audio — use full track if available
     audioEl.src = track.audioFull || track.audio;
     audioEl.load();
 
     // Auto-play
     audioEl.play().then(() => {
-      playBtn.textContent = '⏸';
+      playBtn.classList.add('is-playing');
     }).catch(() => {
-      waitingMsg.textContent = 'Tap play to hear the track';
+      // Autoplay blocked — user must tap play
     });
   }
 
@@ -100,8 +109,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  audioEl.addEventListener('play', () => { playBtn.textContent = '⏸'; });
-  audioEl.addEventListener('pause', () => { playBtn.textContent = '▶'; });
+  audioEl.addEventListener('play', () => { playBtn.classList.add('is-playing'); });
+  audioEl.addEventListener('pause', () => { playBtn.classList.remove('is-playing'); });
+  audioEl.addEventListener('ended', () => { playBtn.classList.remove('is-playing'); });
 
   // --- Audio progress bar ---
   audioEl.addEventListener('timeupdate', () => {
@@ -111,40 +121,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // --- Track ended — reveal answer ---
-  audioEl.addEventListener('ended', () => {
-    revealAnswer();
-  });
-
-  function revealAnswer() {
-    const track = allTracks[currentIdx];
-
-    // Correct answer from data
-    correctArtist.textContent = track.artist || '—';
-    correctSong.textContent = track.song || '—';
-
-    // Team's submitted answer
-    const teamAnswer = App.getAnswer(track.id);
-    yourArtist.textContent = teamAnswer ? (teamAnswer.artist || '—') : 'No answer';
-    yourSong.textContent = teamAnswer ? (teamAnswer.song || '—') : 'No answer';
-
-    // Show
-    answerArea.classList.remove('hidden');
-    waitingMsg.classList.add('hidden');
-    playBtn.textContent = '▶';
-    playBtn.disabled = true;
-
-    // Show next button
-    if (currentIdx < allTracks.length - 1) {
-      nextBtn.textContent = 'Next Track';
-    } else {
-      nextBtn.textContent = 'Finish!';
-    }
-    nextBtn.classList.remove('hidden');
-  }
-
   // --- Next track ---
   nextBtn.addEventListener('click', () => {
+    audioEl.pause();
     loadTrack(currentIdx + 1);
   });
 });

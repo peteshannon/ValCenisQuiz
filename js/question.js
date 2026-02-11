@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (badgeWrap) {
       badgeWrap.classList.remove('hidden');
       const img = document.getElementById('mascot-img');
-      if (img) img.src = team.mascotImg;
+      if (img) img.src = team.mascotOnly;
       const nameEl = document.getElementById('team-name-badge');
       if (nameEl) nameEl.textContent = team.name;
     }
@@ -78,9 +78,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  audioEl.addEventListener('pause', () => { playBtn.textContent = '▶'; });
-  audioEl.addEventListener('play', () => { playBtn.textContent = '⏸'; });
-  audioEl.addEventListener('ended', () => { playBtn.textContent = '▶'; });
+  audioEl.addEventListener('pause', () => { playBtn.classList.remove('is-playing'); });
+  audioEl.addEventListener('play', () => { playBtn.classList.add('is-playing'); });
+  audioEl.addEventListener('ended', () => { playBtn.classList.remove('is-playing'); });
 
   // --- Submit ---
   let confirmingEmpty = false;

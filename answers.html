@@ -8,7 +8,7 @@
 </head>
 <body>
   <div class="header">
-    <div class="brand">Val Cenis Road Trip</div>
+    <img class="logo-header" src="images/SimpleLogo_ValCenis.png" alt="Val Cenis Road Trip">
     <div id="team-badge-wrap" class="hidden">
       <span id="team-badge" class="team-badge">
         <img id="mascot-img" class="team-badge-img" src="" alt="">
@@ -23,9 +23,9 @@
     <div class="reveal-card-inner">
       <div class="celebration-icon">🎶</div>
       <h1>Ready to Reveal?</h1>
-      <p class="catchphrase">Each track plays, then the answer appears.</p>
-      <img class="logo-img mt-8 mb-12" src="images/card-back.png" alt="Val Cenis">
-      <button id="btn-start" class="btn btn-accent">Reveal First Answer</button>
+      <p class="catchphrase">Sit back and enjoy the playlist. Answers shown as each track plays.</p>
+      <img class="logo-img mt-8 mb-12" src="images/SimpleLogo_ValCenis.png" alt="Val Cenis">
+      <button id="btn-start" class="btn btn-accent">Start Playlist</button>
     </div>
   </div>
 
@@ -36,14 +36,15 @@
       <div class="track-counter" id="track-counter">Track 1 of 17</div>
       <div class="round-banner" id="round-title">Name That Tune</div>
 
-      <button id="btn-play-reveal" class="btn btn-play" aria-label="Play">▶</button>
+      <button id="btn-play-reveal" class="btn btn-play" aria-label="Play"></button>
       <audio id="audio-player" preload="auto"></audio>
 
       <div class="progress-track">
         <div class="progress-track-fill" id="audio-progress"></div>
       </div>
 
-      <div id="answer-area" class="hidden">
+      <!-- Answers shown immediately -->
+      <div id="answer-area">
         <div class="answer-correct">
           <div class="label">Correct Answer</div>
           <div class="value" id="correct-artist"></div>
@@ -56,9 +57,7 @@
         </div>
       </div>
 
-      <p id="waiting-msg" class="waiting-msg">Listen to the track...</p>
-
-      <button id="btn-next-reveal" class="btn btn-primary mt-12 hidden">Next Track</button>
+      <button id="btn-next-reveal" class="btn btn-primary mt-12">Next Track</button>
     </div>
   </div>
 
@@ -68,8 +67,8 @@
     <div class="reveal-card-inner">
       <div class="celebration-icon">🏆</div>
       <h1>Bravo!</h1>
-      <p class="catchphrase">Hope you enjoyed the Val Cenis Road Trip Music Quiz!</p>
-      <img class="logo-img mt-8" src="images/card-back.png" alt="Val Cenis">
+      <p class="catchphrase">Hope you enjoyed the Val Cenis Road Trip!</p>
+      <img class="logo-img mt-8" src="images/SimpleLogo_ValCenis.png" alt="Val Cenis">
       <div class="snowflakes mt-12">❄ ❄ ❄ ❄ ❄</div>
     </div>
   </div>

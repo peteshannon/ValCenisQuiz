@@ -3,7 +3,7 @@
    Caches all pages, CSS, JS, and audio
    ============================================ */
 
-const CACHE_NAME = 'vcquiz-v7';
+const CACHE_NAME = 'vcquiz-v8';
 
 /* Base path — auto-detect from SW scope */
 const BASE = self.registration.scope;
@@ -35,6 +35,10 @@ const CORE_ASSETS = [
   'images/mascot-james.png',
   'images/mascot-medcalf.png',
   'images/card-back.png',
+  'images/SimpleLogo_ValCenis.png',
+  'images/OnlyMsacot_Monsieur.png',
+  'images/OnlyMascot_RacletteRaccoon.png',
+  'images/OnlyMascot_Singe.png',
 ].map(p => BASE + p);
 
 /* Google Fonts CSS — cached separately (absolute URL) */

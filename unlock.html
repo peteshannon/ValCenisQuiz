@@ -8,7 +8,7 @@
 </head>
 <body>
   <div class="header">
-    <div class="brand">Val Cenis Road Trip</div>
+    <img class="logo-header" src="images/SimpleLogo_ValCenis.png" alt="Val Cenis Road Trip">
     <div id="team-badge-wrap" class="hidden">
       <span id="team-badge" class="team-badge">
         <img id="mascot-img" class="team-badge-img" src="" alt="">
@@ -44,7 +44,7 @@
     const team = App.getTeamInfo();
     if (team) {
       document.getElementById('team-badge-wrap').classList.remove('hidden');
-      document.getElementById('mascot-img').src = team.mascotImg;
+      document.getElementById('mascot-img').src = team.mascotOnly;
       document.getElementById('team-name').textContent = team.name;
     }
   </script>
