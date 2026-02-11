@@ -17,6 +17,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   App.applyTeamTheme();
 
+  // Always clear stale answers and timings on setup page load
+  localStorage.removeItem('vcquiz_answers');
+  localStorage.removeItem('vcquiz_queue');
+  localStorage.removeItem('vcquiz_clock_start');
+  localStorage.removeItem('vcquiz_clock_end');
+
   // Check if already preloaded
   if (App.isPreloaded()) {
     showComplete();
@@ -24,12 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   startBtn.addEventListener('click', () => {
-    // Clear any stale test data (answers, queue, clock) — fresh start
-    localStorage.removeItem('vcquiz_answers');
-    localStorage.removeItem('vcquiz_queue');
-    localStorage.removeItem('vcquiz_clock_start');
-    localStorage.removeItem('vcquiz_clock_end');
-
     startBtn.classList.add('hidden');
     preloadAssets();
   });
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
         const resp = await fetch(url);
         if (resp.ok) {
-          const cache = await caches.open('vcquiz-v15');
+          const cache = await caches.open('vcquiz-v16');
           await cache.put(url, resp);
         }
       } catch (err) {
