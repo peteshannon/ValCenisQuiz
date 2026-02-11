@@ -812,7 +812,7 @@ p {
    LOGO (card-back crossed skis)
    ============================================ */
 .logo-img {
-  width: 200px;
+  width: 280px;
   height: auto;
   margin: 0 auto 8px;
   display: block;
@@ -840,7 +840,7 @@ p {
 
 /* Smaller mascot for in-page use */
 .mascot-character-sm {
-  width: 80px;
+  width: 140px;
   height: auto;
   display: block;
   margin: 0 auto;
