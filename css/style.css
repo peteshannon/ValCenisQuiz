@@ -1,30 +1,88 @@
 /* ============================================
-   Val Cenis Music Quiz — Global Styles
-   Mobile-first, mascot-card aesthetic
+   Val Cenis Music Quiz — Alpine Card Theme
+   Inspired by collectible mascot cards
    ============================================ */
 
-/* --- Custom Properties --- */
+/* --- Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Fredoka+One&display=swap');
+
+/* ============================================
+   BASE THEME
+   ============================================ */
 :root {
-  --color-bg: #FDF6EC;
-  --color-surface: #FFFFFF;
-  --color-text: #2C2C2C;
-  --color-text-muted: #6B6B6B;
-  --color-primary: #4A6FA5;
-  --color-primary-hover: #3B5D8C;
-  --color-accent: #E8A44A;
+  /* Warm alpine palette */
+  --color-bg: #F5EFE0;
+  --color-surface: #FFFDF7;
+  --color-text: #3B3026;
+  --color-text-muted: #7A6F62;
+  --color-border: #DDD5C5;
   --color-success: #5AAE6D;
-  --color-error: #D35D5D;
-  --color-border: #E8E0D4;
-  --radius: 16px;
-  --radius-sm: 10px;
-  --shadow: 0 2px 12px rgba(0,0,0,0.08);
-  --shadow-lg: 0 4px 24px rgba(0,0,0,0.12);
-  --touch-min: 48px;
-  --font-main: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --color-error: #C94B4B;
+
+  /* Default accent (overridden per team) */
+  --color-primary: #2E6B4F;
+  --color-primary-light: #E8F0EB;
+  --color-accent: #C4873B;
+  --color-accent-light: #F5E6D0;
+  --color-banner: #2E6B4F;
+  --color-banner-text: #FFFFFF;
+
+  /* Card styling */
+  --radius: 20px;
+  --radius-sm: 12px;
+  --radius-xs: 8px;
+  --shadow: 0 2px 8px rgba(59, 48, 38, 0.08), 0 1px 3px rgba(59, 48, 38, 0.06);
+  --shadow-lg: 0 8px 30px rgba(59, 48, 38, 0.12), 0 2px 8px rgba(59, 48, 38, 0.08);
+  --shadow-card: 0 4px 16px rgba(59, 48, 38, 0.10), 0 1px 4px rgba(59, 48, 38, 0.06);
+
+  /* Layout */
+  --touch-min: 50px;
+  --max-width: 400px;
+
+  /* Type */
+  --font-main: 'Nunito', system-ui, -apple-system, sans-serif;
+  --font-display: 'Fredoka One', 'Nunito', cursive, sans-serif;
   --transition: 0.2s ease;
 }
 
-/* --- Reset --- */
+/* ============================================
+   TEAM COLOUR OVERRIDES
+   Applied via data-team attribute on <body>
+   ============================================ */
+
+/* Team Shannon — forest greens, teal (Monsieur Cheval) */
+[data-team="shannon"] {
+  --color-primary: #2E6B4F;
+  --color-primary-light: #E0EDDF;
+  --color-accent: #4A9E6F;
+  --color-accent-light: #E8F5E9;
+  --color-banner: #2E6B4F;
+  --color-banner-text: #FFFFFF;
+}
+
+/* Team James — warm oranges, russet (Raclette Raccoon) */
+[data-team="james"] {
+  --color-primary: #C2572A;
+  --color-primary-light: #FBEADF;
+  --color-accent: #E8853A;
+  --color-accent-light: #FFF0E0;
+  --color-banner: #C2572A;
+  --color-banner-text: #FFFFFF;
+}
+
+/* Team Medcalf — rich greens, gold (Prof Singe) */
+[data-team="medcalf"] {
+  --color-primary: #3D7A3E;
+  --color-primary-light: #E5F0DA;
+  --color-accent: #C4A432;
+  --color-accent-light: #F8F0D4;
+  --color-banner: #3D7A3E;
+  --color-banner-text: #FFFFFF;
+}
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html {
@@ -42,135 +100,262 @@ body {
   align-items: center;
   padding: 16px;
   line-height: 1.5;
+  background-image:
+    radial-gradient(ellipse at 20% 0%, rgba(200, 220, 210, 0.3) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 100%, rgba(210, 195, 170, 0.2) 0%, transparent 60%);
 }
 
-/* --- Card Panel --- */
+/* ============================================
+   CARD PANEL — The core visual element
+   Echoes the collectible card look
+   ============================================ */
 .card {
   background: var(--color-surface);
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 24px 20px;
+  box-shadow: var(--shadow-card);
+  padding: 28px 22px;
   width: 100%;
-  max-width: 420px;
+  max-width: var(--max-width);
   margin-bottom: 16px;
+  border: 2px solid var(--color-border);
+  position: relative;
 }
 
-/* --- Typography --- */
-h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
-h2 { font-size: 1.2rem; font-weight: 600; margin-bottom: 6px; }
-p  { margin-bottom: 12px; color: var(--color-text-muted); }
+/* Subtle inner glow like parchment */
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: calc(var(--radius) - 4px);
+  border: 1px solid rgba(255, 253, 247, 0.6);
+  pointer-events: none;
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+h1 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 400; /* Fredoka One is already bold */
+  color: var(--color-text);
+  margin-bottom: 10px;
+  letter-spacing: 0.3px;
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 6px;
+}
+
+p {
+  margin-bottom: 12px;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
 
 .text-center { text-align: center; }
-.brand { color: var(--color-primary); font-weight: 700; letter-spacing: 0.5px; }
-.team-name { color: var(--color-accent); font-weight: 600; }
 
-/* --- Buttons --- */
+/* ============================================
+   HEADER — Banner ribbon style
+   ============================================ */
+.header {
+  text-align: center;
+  padding: 12px 0 8px;
+  width: 100%;
+  max-width: var(--max-width);
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--color-primary);
+  letter-spacing: 0.5px;
+}
+
+.team-name {
+  display: inline-block;
+  background: var(--color-banner);
+  color: var(--color-banner-text);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 16px;
+  border-radius: 20px;
+  margin-top: 6px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.round-indicator {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-top: 8px;
+  background: var(--color-primary-light);
+  padding: 6px 14px;
+  border-radius: var(--radius-xs);
+  display: inline-block;
+}
+
+/* ============================================
+   MASCOT IMAGE
+   ============================================ */
+.mascot-img {
+  width: 120px;
+  height: auto;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin: 0 auto 12px;
+  display: block;
+  border: 2px solid var(--color-border);
+}
+
+.mascot-img-sm {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top;
+  border: 2px solid var(--color-banner);
+  box-shadow: var(--shadow);
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: var(--touch-min);
-  padding: 12px 28px;
+  padding: 14px 28px;
   border: none;
   border-radius: var(--radius-sm);
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-family: var(--font-main);
+  font-size: 1.05rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: background var(--transition), transform var(--transition);
+  transition: all var(--transition);
   width: 100%;
   text-decoration: none;
   color: #fff;
+  letter-spacing: 0.3px;
 }
 .btn:active { transform: scale(0.97); }
 
-.btn-primary { background: var(--color-primary); }
-.btn-primary:hover { background: var(--color-primary-hover); }
+.btn-primary {
+  background: var(--color-primary);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+}
+.btn-primary:hover { filter: brightness(1.08); }
 
-.btn-accent { background: var(--color-accent); }
-.btn-success { background: var(--color-success); }
+.btn-accent {
+  background: var(--color-accent);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+}
+.btn-accent:hover { filter: brightness(1.08); }
 
+.btn-success {
+  background: var(--color-success);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+}
+
+/* Large circular play button */
 .btn-play {
   background: var(--color-accent);
-  width: 96px;
-  height: 96px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   font-size: 2.5rem;
   padding: 0;
-  box-shadow: var(--shadow-lg);
-  margin: 16px auto;
+  box-shadow: var(--shadow-lg), 0 0 0 4px var(--color-accent-light);
+  margin: 20px auto;
   display: flex;
+  border: 3px solid rgba(255,255,255,0.3);
+}
+.btn-play:active {
+  transform: scale(0.93);
+  box-shadow: var(--shadow), 0 0 0 4px var(--color-accent-light);
 }
 
+/* Navigation buttons */
 .btn-nav {
-  background: transparent;
+  background: var(--color-surface);
   color: var(--color-primary);
   border: 2px solid var(--color-border);
-  min-height: 44px;
+  min-height: 46px;
   padding: 10px 20px;
-  font-size: 1rem;
+  font-size: 0.95rem;
+  box-shadow: none;
+}
+.btn-nav:hover {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
 }
 
-.btn[disabled] { opacity: 0.5; pointer-events: none; }
+.btn[disabled] {
+  opacity: 0.4;
+  pointer-events: none;
+  filter: grayscale(0.3);
+}
 
-/* --- Inputs --- */
+/* ============================================
+   INPUTS
+   ============================================ */
 .input-field {
   width: 100%;
   min-height: var(--touch-min);
-  padding: 12px 16px;
+  padding: 14px 16px;
   border: 2px solid var(--color-border);
   border-radius: var(--radius-sm);
   font-size: 1rem;
   font-family: var(--font-main);
   background: var(--color-bg);
   color: var(--color-text);
-  transition: border-color var(--transition);
+  transition: border-color var(--transition), box-shadow var(--transition);
   margin-bottom: 12px;
 }
 .input-field:focus {
   outline: none;
   border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
 }
 
 label {
   display: block;
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: 0.82rem;
+  font-weight: 700;
   color: var(--color-text-muted);
   margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-/* --- Progress Bar --- */
+/* ============================================
+   PROGRESS BAR
+   ============================================ */
 .progress-wrap {
   width: 100%;
-  height: 12px;
+  height: 14px;
   background: var(--color-border);
-  border-radius: 6px;
+  border-radius: 7px;
   overflow: hidden;
   margin: 16px 0;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.08);
 }
 .progress-bar {
   height: 100%;
-  background: var(--color-success);
-  border-radius: 6px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  border-radius: 7px;
   width: 0%;
   transition: width 0.4s ease;
 }
 
-/* --- Header --- */
-.header {
-  text-align: center;
-  padding: 12px 0;
-  width: 100%;
-  max-width: 420px;
-}
-.header .brand { font-size: 1.3rem; }
-.header .round-indicator {
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
-  margin-top: 2px;
-}
-
-/* --- Navigation Row --- */
+/* ============================================
+   NAVIGATION ROW
+   ============================================ */
 .nav-row {
   display: flex;
   gap: 12px;
@@ -178,41 +363,176 @@ label {
 }
 .nav-row .btn-nav { flex: 1; }
 
-/* --- Status messages --- */
+/* ============================================
+   STATUS MESSAGES
+   ============================================ */
 .status {
   text-align: center;
-  padding: 12px;
-  border-radius: var(--radius-sm);
-  font-weight: 600;
+  padding: 12px 16px;
+  border-radius: var(--radius-xs);
+  font-weight: 700;
   margin: 12px 0;
+  font-size: 0.9rem;
 }
-.status-success { background: #E8F5E9; color: var(--color-success); }
-.status-error { background: #FDECEA; color: var(--color-error); }
+.status-success {
+  background: #E8F5E9;
+  color: var(--color-success);
+  border: 1px solid #C8E6C9;
+}
+.status-error {
+  background: #FDECEA;
+  color: var(--color-error);
+  border: 1px solid #F5C6CB;
+}
 
-/* --- Utilities --- */
+/* ============================================
+   INSTRUCTION ITEMS
+   ============================================ */
+.instruction-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 18px;
+  padding: 10px 12px;
+  background: var(--color-bg);
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--color-border);
+}
+.instruction-item .instruction-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  width: 32px;
+  text-align: center;
+  line-height: 1;
+  padding-top: 2px;
+}
+.instruction-item p {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+/* ============================================
+   ANSWERS REVEALED PAGE
+   ============================================ */
+.reveal-card {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  padding: 28px 22px;
+  width: 100%;
+  max-width: var(--max-width);
+  margin-bottom: 16px;
+  text-align: center;
+  border: 2px solid var(--color-border);
+}
+
+.answer-correct {
+  background: #E8F5E9;
+  border: 2px solid #A5D6A7;
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  margin: 14px 0;
+}
+.answer-correct .label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-success);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+.answer-correct .value {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--color-text);
+}
+
+.answer-yours {
+  background: var(--color-bg);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  margin: 8px 0;
+}
+.answer-yours .label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+.answer-yours .value {
+  font-size: 1rem;
+  color: var(--color-text);
+}
+
+.track-counter {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.round-banner {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--color-primary);
+  margin-bottom: 4px;
+}
+
+.progress-track {
+  height: 5px;
+  background: var(--color-border);
+  border-radius: 3px;
+  margin: 14px 0;
+  overflow: hidden;
+}
+.progress-track-fill {
+  height: 100%;
+  background: var(--color-accent);
+  border-radius: 3px;
+  width: 0%;
+  transition: width 0.3s linear;
+}
+
+.waiting-msg {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin-top: 8px;
+  font-style: italic;
+}
+
+/* ============================================
+   CELEBRATION ICONS
+   ============================================ */
+.celebration-icon {
+  font-size: 3rem;
+  margin-bottom: 8px;
+  line-height: 1;
+}
+
+/* ============================================
+   UTILITIES
+   ============================================ */
 .hidden { display: none !important; }
 .mb-8 { margin-bottom: 8px; }
 .mb-16 { margin-bottom: 16px; }
 .mt-16 { margin-top: 16px; }
 
-/* --- Instruction items --- */
-.instruction-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  margin-bottom: 16px;
-}
-.instruction-item .instruction-icon {
-  font-size: 1.5rem;
-  flex-shrink: 0;
-  width: 32px;
-  text-align: center;
-}
-.instruction-item p {
-  margin: 0;
-  color: var(--color-text);
-  font-size: 0.95rem;
-}
-
 /* --- Audio element (hidden native controls) --- */
 audio { display: none; }
+
+/* ============================================
+   HOLDING PAGE — vertically centred
+   ============================================ */
+.holding-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}

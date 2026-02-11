@@ -46,11 +46,10 @@
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
   <script>
-    // Show team name if set
+    App.applyTeamTheme();
     const team = App.getTeamInfo();
     if (team) {
-      document.getElementById('team-name').textContent =
-        team.name + ' — assisted by ' + team.mascot + ' ' + team.mascotEmoji;
+      document.getElementById('team-name').textContent = team.name + ' — ' + team.mascot;
     }
   </script>
 </body>

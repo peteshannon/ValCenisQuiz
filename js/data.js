@@ -52,9 +52,9 @@ const QUIZ_DATA = {
 
   /* Teams — identity determined by entry URL */
   teams: {
-    shannon: { name: 'Team Shannon', mascot: 'Monsieur Cheval', mascotEmoji: '🐴' },
-    james:   { name: 'Team James',   mascot: 'Raclette Raccoon', mascotEmoji: '🦝' },
-    medcalf: { name: 'Team Medcalf', mascot: 'Prof Singe',       mascotEmoji: '🐒' },
+    shannon: { name: 'Team Shannon', mascot: 'Monsieur Cheval', mascotEmoji: '🐴', mascotImg: 'images/mascot-shannon.png', color: 'shannon' },
+    james:   { name: 'Team James',   mascot: 'Raclette Raccoon', mascotEmoji: '🦝', mascotImg: 'images/mascot-james.png',   color: 'james' },
+    medcalf: { name: 'Team Medcalf', mascot: 'Prof Singe',       mascotEmoji: '🐒', mascotImg: 'images/mascot-medcalf.png', color: 'medcalf' },
   },
 
   /* Unlock codes */

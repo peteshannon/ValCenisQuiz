@@ -3,7 +3,7 @@
    Caches all pages, CSS, JS, and audio
    ============================================ */
 
-const CACHE_NAME = 'vcquiz-v5';
+const CACHE_NAME = 'vcquiz-v6';
 
 /* Base path — auto-detect from SW scope */
 const BASE = self.registration.scope;
@@ -31,6 +31,10 @@ const CORE_ASSETS = [
   'final-unlock.html',
   'answers.html',
   'js/answers.js',
+  'images/mascot-shannon.png',
+  'images/mascot-james.png',
+  'images/mascot-medcalf.png',
+  'images/card-back.png',
 ].map(p => BASE + p);
 
 /* Install — cache core assets */
@@ -94,9 +98,9 @@ self.addEventListener('fetch', (e) => {
   }
 });
 
-/* Check if URL is an audio file */
+/* Check if URL is a large cacheable asset (audio/images) */
 function isAudioFile(url) {
-  return url.endsWith('.mp3') || url.endsWith('.wav') || url.endsWith('.ogg');
+  return url.endsWith('.mp3') || url.endsWith('.wav') || url.endsWith('.ogg') || url.endsWith('.png');
 }
 
 /* Message handler — preload audio files on demand */

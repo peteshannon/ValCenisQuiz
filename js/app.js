@@ -79,6 +79,14 @@ const App = (() => {
     return `question.html?r=${roundIdx}&t=${trackIdx}`;
   }
 
+  /* --- Apply team theme to page --- */
+  function applyTeamTheme() {
+    const team = getTeam();
+    if (team) {
+      document.body.setAttribute('data-team', team);
+    }
+  }
+
   /* --- Service Worker Registration --- */
   function registerSW() {
     if ('serviceWorker' in navigator) {
@@ -94,6 +102,6 @@ const App = (() => {
     getAnswers, saveAnswer, getAnswer,
     queueSubmission,
     setPreloadComplete, isPreloaded,
-    getTrackLocation, registerSW,
+    getTrackLocation, registerSW, applyTeamTheme,
   };
 })();

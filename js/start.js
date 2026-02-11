@@ -10,19 +10,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const startBtn = document.getElementById('btn-start-preload');
   const doneSection = document.getElementById('preload-done');
   const teamNameEl = document.getElementById('team-name');
-  const mascotEl = document.getElementById('mascot-emoji');
 
   // Detect and persist team from URL
   const teamId = App.detectTeamFromURL();
   if (teamId) {
     App.setTeam(teamId);
   }
+  App.applyTeamTheme();
 
   // Show team info
   const team = App.getTeamInfo();
   if (team) {
     teamNameEl.textContent = team.name;
-    mascotEl.textContent = team.mascotEmoji;
     document.getElementById('mascot-name').textContent = 'Assisted by ' + team.mascot;
   }
 
@@ -54,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
         const resp = await fetch(url);
         if (resp.ok) {
-          const cache = await caches.open('vcquiz-v5');
+          const cache = await caches.open('vcquiz-v6');
           await cache.put(url, resp);
         }
       } catch (err) {
