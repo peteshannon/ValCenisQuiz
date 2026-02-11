@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Success — redirect immediately
       btn.disabled = true;
       input.disabled = true;
-      window.location.href = 'instructions.html';
+      window.location.href = 'round-splash.html';
     } else if (code === '') {
       feedback.innerHTML = '<div class="status status-error">Please enter a code.</div>';
     } else {
