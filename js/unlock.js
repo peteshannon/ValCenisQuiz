@@ -42,11 +42,13 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.disabled = true;
       input.disabled = true;
 
-      // Calculate elapsed time and submit to Google Sheet
-      const elapsedMs = clockStart ? Date.now() - clockStart : 0;
+      // Save end time and calculate elapsed
+      const clockEnd = Date.now();
+      localStorage.setItem('vcquiz_clock_end', clockEnd.toString());
+      const elapsedMs = clockStart ? clockEnd - clockStart : 0;
       await submitUnlockTime(elapsedMs);
 
-      window.location.href = 'round-splash.html';
+      window.location.href = 'unlock-success.html';
     } else if (code === '') {
       feedback.innerHTML = '<div class="status status-error">Please enter a code.</div>';
     } else {

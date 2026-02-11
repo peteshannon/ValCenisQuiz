@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Val Cenis — Unlocked!</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .success-title {
+      font-family: var(--font-display);
+      font-size: 3.5rem;
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--color-heading);
+      margin: 0;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    }
+    .success-icon {
+      font-size: 3.5rem;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .unlock-time {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="holding-container">
+    <div class="card-back">
+      <div class="card-back-inner" style="padding:20px 18px;">
+        <div class="snowflakes">❄ ❄ ❄ ❄ ❄</div>
+
+        <span class="success-icon">🎉</span>
+        <p class="success-title">You did it!</p>
+
+        <p id="time-display" class="unlock-time"></p>
+
+        <div class="snowflakes" style="margin-top:8px;">❄ ❄ ❄ ❄ ❄</div>
+
+        <a href="round-splash.html" class="btn btn-primary" style="margin-top:12px;">Continue</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    App.applyTeamTheme();
+
+    // Show the unlock time if available
+    const clockStart = parseInt(localStorage.getItem('vcquiz_clock_start') || '0', 10);
+    const clockEnd = parseInt(localStorage.getItem('vcquiz_clock_end') || '0', 10);
+    if (clockStart && clockEnd) {
+      const elapsed = clockEnd - clockStart;
+      const totalSecs = Math.floor(elapsed / 1000);
+      const mins = Math.floor(totalSecs / 60);
+      const secs = totalSecs % 60;
+      const timeStr = mins > 0
+        ? mins + ' min ' + secs + ' sec'
+        : secs + ' seconds';
+      document.getElementById('time-display').textContent = 'Your time: ' + timeStr;
+    }
+  </script>
+</body>
+</html>

@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const correctSong   = document.getElementById('correct-song');
   const yourArtist    = document.getElementById('your-artist');
   const yourSong      = document.getElementById('your-song');
-  const nextBtn       = document.getElementById('btn-next-reveal');
 
   // --- Team Badge ---
   const team = App.getTeamInfo();
@@ -76,13 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
     yourArtist.textContent = teamAnswer ? (teamAnswer.artist || '—') : 'No answer';
     yourSong.textContent = teamAnswer ? (teamAnswer.song || '—') : 'No answer';
 
-    // Next button
-    if (currentIdx < allTracks.length - 1) {
-      nextBtn.textContent = 'Next Track';
-    } else {
-      nextBtn.textContent = 'Finish!';
-    }
-
     // Reset play button
     playBtn.classList.remove('is-playing');
     playBtn.disabled = false;
@@ -111,7 +103,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   audioEl.addEventListener('play', () => { playBtn.classList.add('is-playing'); });
   audioEl.addEventListener('pause', () => { playBtn.classList.remove('is-playing'); });
-  audioEl.addEventListener('ended', () => { playBtn.classList.remove('is-playing'); });
+  audioEl.addEventListener('ended', () => {
+    playBtn.classList.remove('is-playing');
+    // Auto-advance to next track
+    loadTrack(currentIdx + 1);
+  });
 
   // --- Audio progress bar ---
   audioEl.addEventListener('timeupdate', () => {
@@ -121,9 +117,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // --- Next track ---
-  nextBtn.addEventListener('click', () => {
-    audioEl.pause();
-    loadTrack(currentIdx + 1);
-  });
 });
