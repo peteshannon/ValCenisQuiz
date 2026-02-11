@@ -1,15 +1,15 @@
 # NOW — Current Work Context
 
 **Last Updated:** February 2026
-**Session:** 2 (continued — Team URLs + Results)
+**Session:** 3 (Alpine Card Theme)
 **Branch:** `main`
 
 ---
 
 ## Active Work
 
-**Status:** Team entry pages, localStorage persistence, and results submission built
-**Priority:** Pete to set up Google Sheet + Apps Script, add audio files, test full flow
+**Status:** Full visual redesign complete — alpine card theme with team colours and mascot images
+**Priority:** Test on mobile, refine styling, Round 3 content
 **Spec:** `docs/SPEC.md`
 
 ---
@@ -23,18 +23,25 @@ Three teams, offline-capable, GitHub Pages hosted. Plain HTML/CSS/JS only.
 
 ## What's Built
 
+- **Full quiz flow:** start → preload → holding → unlock → instructions → questions → round intros → final unlock → answers
 - **Team entry pages:** `start-shannon.html`, `start-james.html`, `start-medcalf.html`
-- **Preload + team identity** in one step (localStorage, survives tab close)
-- **Full quiz flow:** start → preload → holding → unlock → instructions → questions → round intros
-- **Results submission:** `js/submit.js` posts to Google Sheet, queues offline, retries
-- **Service Worker:** network-first for HTML/CSS/JS, cache-first for audio
+- **Results submission:** `js/submit.js` posts to Google Sheet with correct answers, timing, dedup
+- **Service Worker:** network-first for HTML/CSS/JS, cache-first for audio/images (v6)
+- **Audio:** R1 (12 tracks) + R2 (5 tracks) clips and full-length tracks
+- **Answers:** all R1 + R2 answers populated in `js/data.js`
+- **Visual theme (NEW):**
+  - Alpine card aesthetic inspired by mascot card designs
+  - Team-specific colour palettes via `data-team` attribute
+  - Mascot images displayed on start, holding, and other pages
+  - Nunito + Fredoka One typography
+  - Parchment tones, card borders, banner badges
 
 ## What's Next
 
-- Pete: create Google Sheet + deploy Apps Script, paste URL into `js/data.js` `submitEndpoint`
-- Add actual audio files to `audio/` directory
-- Final unlock page + answers-revealed playlist mode
+- Test visual design on mobile (375px)
+- Round 3 audio + answers if applicable
 - QR code generation for team URLs
+- Any design polish after mobile testing
 
 ---
 
