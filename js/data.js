@@ -36,18 +36,6 @@ const QUIZ_DATA = {
         { id: 'r2t5', label: 'Track 5', audio: 'audio/r2_05.mp3', audioFull: 'audio/r2_05_full.mp3', artist: 'Olivia Rodrigo', song: 'good 4 u' },
       ]
     },
-    {
-      id: 'round3',
-      title: 'Minions Round',
-      description: 'Sped-up singing — can you still tell?',
-      tracks: [
-        { id: 'r3t1', label: 'Track 1', audio: 'audio/r3_01.mp3', artist: 'TBC', song: 'TBC' },
-        { id: 'r3t2', label: 'Track 2', audio: 'audio/r3_02.mp3', artist: 'TBC', song: 'TBC' },
-        { id: 'r3t3', label: 'Track 3', audio: 'audio/r3_03.mp3', artist: 'TBC', song: 'TBC' },
-        { id: 'r3t4', label: 'Track 4', audio: 'audio/r3_04.mp3', artist: 'TBC', song: 'TBC' },
-        { id: 'r3t5', label: 'Track 5', audio: 'audio/r3_05.mp3', artist: 'TBC', song: 'TBC' },
-      ]
-    }
   ],
 
   /* Teams — identity determined by entry URL */
