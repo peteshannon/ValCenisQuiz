@@ -3,7 +3,7 @@
    Caches all pages, CSS, JS, and audio
    ============================================ */
 
-const CACHE_NAME = 'vcquiz-v6';
+const CACHE_NAME = 'vcquiz-v7';
 
 /* Base path — auto-detect from SW scope */
 const BASE = self.registration.scope;
@@ -37,11 +37,16 @@ const CORE_ASSETS = [
   'images/card-back.png',
 ].map(p => BASE + p);
 
-/* Install — cache core assets */
+/* Google Fonts CSS — cached separately (absolute URL) */
+const FONT_ASSETS = [
+  'https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Nunito:wght@400;600;700;800&display=swap',
+];
+
+/* Install — cache core assets + font CSS */
 self.addEventListener('install', (e) => {
   e.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(CORE_ASSETS))
+      .then(cache => cache.addAll([...CORE_ASSETS, ...FONT_ASSETS]))
       .then(() => self.skipWaiting())
   );
 });
@@ -98,9 +103,10 @@ self.addEventListener('fetch', (e) => {
   }
 });
 
-/* Check if URL is a large cacheable asset (audio/images) */
+/* Check if URL is a static asset that should use cache-first */
 function isAudioFile(url) {
-  return url.endsWith('.mp3') || url.endsWith('.wav') || url.endsWith('.ogg') || url.endsWith('.png');
+  return url.endsWith('.mp3') || url.endsWith('.wav') || url.endsWith('.ogg')
+    || url.endsWith('.png') || url.includes('fonts.gstatic.com') || url.includes('fonts.googleapis.com');
 }
 
 /* Message handler — preload audio files on demand */

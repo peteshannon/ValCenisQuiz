@@ -83,7 +83,28 @@ document.addEventListener('DOMContentLoaded', () => {
   audioEl.addEventListener('ended', () => { playBtn.textContent = '▶'; });
 
   // --- Submit ---
+  let confirmingEmpty = false;
+
   submitBtn.addEventListener('click', () => {
+    const artist = artistInput.value.trim();
+    const song = songInput.value.trim();
+
+    // Warn once if both fields are empty
+    if (!artist && !song && !confirmingEmpty) {
+      confirmingEmpty = true;
+      submitStatus.textContent = 'No answer entered — tap Submit again to skip.';
+      submitStatus.className = 'status status-error';
+      setTimeout(() => {
+        if (confirmingEmpty) {
+          confirmingEmpty = false;
+          submitStatus.textContent = '';
+          submitStatus.className = '';
+        }
+      }, 4000);
+      return;
+    }
+    confirmingEmpty = false;
+
     if (!firstSubmitTime) {
       firstSubmitTime = Date.now();
     }
@@ -93,8 +114,8 @@ document.addEventListener('DOMContentLoaded', () => {
       : null;
 
     App.saveAnswer(track.id, {
-      artist: artistInput.value.trim(),
-      song: songInput.value.trim(),
+      artist,
+      song,
       firstPlayTime,
       firstSubmitTime,
       duration,
