@@ -41,8 +41,9 @@ const Submit = (() => {
     return null;
   }
 
-  /* Send a single answer to the Google Sheet */
-  async function sendAnswer(trackId) {
+  /* Send a single answer to the Google Sheet
+     actualElapsed: ms from first play to THIS submit (optional, for live submits) */
+  async function sendAnswer(trackId, actualElapsed) {
     if (!ENDPOINT) return false;
 
     const answer = App.getAnswer(trackId);
@@ -64,7 +65,8 @@ const Submit = (() => {
           correctSong: correct ? correct.song : '',
           firstPlayTime: formatTime(answer.firstPlayTime),
           firstSubmitTime: formatTime(answer.firstSubmitTime),
-          duration: formatDuration(answer.duration),
+          originalDuration: formatDuration(answer.duration),
+          actualElapsed: formatDuration(actualElapsed),
         }),
       });
 

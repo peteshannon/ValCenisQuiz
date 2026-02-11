@@ -93,9 +93,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     App.queueSubmission(track.id);
 
-    // Try to submit immediately
+    // Try to submit immediately, include actual elapsed for this submission
+    const thisSubmitElapsed = firstPlayTime ? Date.now() - firstPlayTime : null;
     if (typeof Submit !== 'undefined') {
-      Submit.sendAnswer(track.id);
+      Submit.sendAnswer(track.id, thisSubmitElapsed);
     }
 
     submitStatus.textContent = 'Saved!';
