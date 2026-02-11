@@ -8,35 +8,50 @@
 </head>
 <body>
   <div class="header">
-    <div class="brand">Val Cenis</div>
-    <div id="team-name" class="team-name"></div>
-    <div class="round-indicator">
-      <span id="round-info"></span> — <span id="track-info"></span>
+    <div class="brand">Val Cenis Road Trip</div>
+    <div id="team-badge-wrap" class="hidden">
+      <span id="team-badge" class="team-badge">
+        <img id="mascot-img" class="team-badge-img" src="" alt="">
+        <span id="team-name-badge"></span>
+      </span>
     </div>
   </div>
 
-  <div class="card text-center">
-    <!-- Play Button -->
-    <button id="btn-play" class="btn btn-play" aria-label="Play">▶</button>
-    <audio id="audio-player" preload="auto"></audio>
+  <div class="card">
+    <div class="ribbon" id="round-ribbon">Round 1</div>
 
-    <!-- Answer Fields -->
-    <div style="text-align:left; margin-top:20px;">
-      <label for="input-artist">Artist</label>
-      <input type="text" id="input-artist" class="input-field" placeholder="Artist name..." autocomplete="off">
+    <div class="card-inner text-center">
+      <!-- Track number — giant and unmissable -->
+      <div class="track-number-label" id="round-info">Name That Tune</div>
+      <div class="track-number" id="track-number">1</div>
+      <div class="track-of" id="track-of">of 12</div>
 
-      <label for="input-song">Song Title</label>
-      <input type="text" id="input-song" class="input-field" placeholder="Song title..." autocomplete="off">
-    </div>
+      <!-- Wax-seal play button -->
+      <button id="btn-play" class="btn btn-play" aria-label="Play">▶</button>
+      <audio id="audio-player" preload="auto"></audio>
 
-    <!-- Submit -->
-    <button id="btn-submit" class="btn btn-primary mt-16">Submit Answer</button>
-    <div id="submit-status"></div>
+      <!-- Answer fields — handwritten line style -->
+      <div style="text-align:left; margin-top:16px;">
+        <div class="input-wrap">
+          <label class="input-label" for="input-artist">Artist</label>
+          <input type="text" id="input-artist" class="input-field" placeholder="Who is it?" autocomplete="off">
+        </div>
 
-    <!-- Navigation -->
-    <div class="nav-row">
-      <a id="btn-prev" class="btn btn-nav" href="#">← Previous</a>
-      <a id="btn-next" class="btn btn-nav" href="#">Next →</a>
+        <div class="input-wrap">
+          <label class="input-label" for="input-song">Song Title</label>
+          <input type="text" id="input-song" class="input-field" placeholder="What's the song?" autocomplete="off">
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <button id="btn-submit" class="btn btn-primary mt-8">Submit Answer</button>
+      <div id="submit-status"></div>
+
+      <!-- Navigation -->
+      <div class="nav-row">
+        <a id="btn-prev" class="btn btn-nav" href="#">← Prev</a>
+        <a id="btn-next" class="btn btn-nav" href="#">Next →</a>
+      </div>
     </div>
   </div>
 

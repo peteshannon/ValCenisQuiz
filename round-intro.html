@@ -8,17 +8,32 @@
 </head>
 <body>
   <div class="header">
-    <div class="brand">Val Cenis Quiz</div>
-    <div id="team-name" class="team-name"></div>
+    <div class="brand">Val Cenis Road Trip</div>
+    <div id="team-badge-wrap" class="hidden">
+      <span id="team-badge" class="team-badge">
+        <img id="mascot-img" class="team-badge-img" src="" alt="">
+        <span id="team-name-badge"></span>
+      </span>
+    </div>
   </div>
 
-  <div class="card text-center" style="margin-top:24px;">
-    <p id="round-label" style="font-size:0.85rem; color:var(--color-text-muted); margin-bottom:4px; text-transform:uppercase; letter-spacing:0.5px; font-weight:700;"></p>
-    <h1 id="round-title" style="font-size:1.8rem; margin-bottom:12px;"></h1>
-    <p id="round-desc" style="font-size:1.1rem;"></p>
-    <p id="round-count" style="font-size:0.9rem; color:var(--color-text-muted); font-weight:600;"></p>
+  <div class="card" style="margin-top:16px;">
+    <div class="ribbon" id="round-ribbon">Round 2</div>
 
-    <a id="btn-go" class="btn btn-accent mt-16" href="#">Let's Go!</a>
+    <div class="card-inner text-center">
+      <div class="snowflakes mb-8">❄ ❄ ❄</div>
+
+      <div class="round-intro-number" id="round-label">Round 2</div>
+      <div class="round-intro-title" id="round-title">Reversed Tracks</div>
+      <p class="round-intro-desc" id="round-desc">These tracks are playing backwards!</p>
+      <div class="round-intro-count" id="round-count">5 tracks</div>
+
+      <img class="logo-img mt-12 mb-8" src="images/card-back.png" alt="Val Cenis">
+
+      <a id="btn-go" class="btn btn-accent mt-8" href="#">Let's Go!</a>
+
+      <div class="snowflakes mt-12">❄ ❄ ❄</div>
+    </div>
   </div>
 
   <script src="js/data.js"></script>
@@ -31,6 +46,7 @@
 
     if (!round) { window.location.href = 'holding.html'; }
 
+    document.getElementById('round-ribbon').textContent = 'Round ' + (roundIdx + 1);
     document.getElementById('round-label').textContent = 'Round ' + (roundIdx + 1);
     document.getElementById('round-title').textContent = round.title;
     document.getElementById('round-desc').textContent = round.description;
@@ -39,7 +55,9 @@
 
     const team = App.getTeamInfo();
     if (team) {
-      document.getElementById('team-name').textContent = team.name + ' — ' + team.mascot;
+      document.getElementById('team-badge-wrap').classList.remove('hidden');
+      document.getElementById('mascot-img').src = team.mascotImg;
+      document.getElementById('team-name-badge').textContent = team.name;
     }
   </script>
 </body>

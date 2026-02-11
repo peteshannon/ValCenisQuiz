@@ -16,28 +16,35 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentIdx = 0;
 
   // --- UI Elements ---
-  const stateReady   = document.getElementById('state-ready');
-  const statePlaying = document.getElementById('state-playing');
-  const stateDone    = document.getElementById('state-done');
-  const startBtn     = document.getElementById('btn-start');
-  const playBtn      = document.getElementById('btn-play-reveal');
-  const audioEl      = document.getElementById('audio-player');
+  const stateReady    = document.getElementById('state-ready');
+  const statePlaying  = document.getElementById('state-playing');
+  const stateDone     = document.getElementById('state-done');
+  const startBtn      = document.getElementById('btn-start');
+  const playBtn       = document.getElementById('btn-play-reveal');
+  const audioEl       = document.getElementById('audio-player');
   const audioProgress = document.getElementById('audio-progress');
-  const roundTitleEl = document.getElementById('round-title');
+  const roundRibbonEl = document.getElementById('round-ribbon');
+  const roundTitleEl  = document.getElementById('round-title');
   const trackCounterEl = document.getElementById('track-counter');
-  const answerArea   = document.getElementById('answer-area');
+  const answerArea    = document.getElementById('answer-area');
   const correctArtist = document.getElementById('correct-artist');
-  const correctSong  = document.getElementById('correct-song');
-  const yourArtist   = document.getElementById('your-artist');
-  const yourSong     = document.getElementById('your-song');
-  const waitingMsg   = document.getElementById('waiting-msg');
-  const nextBtn      = document.getElementById('btn-next-reveal');
-  const teamNameEl   = document.getElementById('team-name');
+  const correctSong   = document.getElementById('correct-song');
+  const yourArtist    = document.getElementById('your-artist');
+  const yourSong      = document.getElementById('your-song');
+  const waitingMsg    = document.getElementById('waiting-msg');
+  const nextBtn       = document.getElementById('btn-next-reveal');
 
-  // --- Team Info ---
+  // --- Team Badge ---
   const team = App.getTeamInfo();
   if (team) {
-    teamNameEl.textContent = team.name + ' — ' + team.mascot + ' ' + team.mascotEmoji;
+    const badgeWrap = document.getElementById('team-badge-wrap');
+    if (badgeWrap) {
+      badgeWrap.classList.remove('hidden');
+      const img = document.getElementById('mascot-img');
+      if (img) img.src = team.mascotImg;
+      const nameEl = document.getElementById('team-name-badge');
+      if (nameEl) nameEl.textContent = team.name;
+    }
   }
 
   // --- Start ---
@@ -59,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const track = allTracks[idx];
 
     // Header
+    roundRibbonEl.textContent = 'Round ' + (track.roundIdx + 1);
     roundTitleEl.textContent = track.roundTitle;
     trackCounterEl.textContent = 'Track ' + (idx + 1) + ' of ' + allTracks.length;
 
@@ -79,7 +87,6 @@ document.addEventListener('DOMContentLoaded', () => {
     audioEl.play().then(() => {
       playBtn.textContent = '⏸';
     }).catch(() => {
-      // Autoplay blocked — user must tap play
       waitingMsg.textContent = 'Tap play to hear the track';
     });
   }

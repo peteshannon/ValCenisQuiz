@@ -8,25 +8,45 @@
 </head>
 <body>
   <div class="header">
-    <div class="brand">Val Cenis</div>
+    <div class="brand">Val Cenis Road Trip</div>
+    <div id="team-badge-wrap" class="hidden">
+      <span id="team-badge" class="team-badge">
+        <img id="mascot-img" class="team-badge-img" src="" alt="">
+        <span id="team-name"></span>
+      </span>
+    </div>
   </div>
 
-  <div class="card text-center">
-    <h1>Something awaits...</h1>
-    <p>Enter the secret code to begin.</p>
+  <div class="card">
+    <div class="ribbon">Secret Code Required</div>
+    <div class="card-inner text-center">
+      <div class="snowflakes mb-8">❄ ❄ ❄</div>
 
-    <input type="tel" id="input-code" class="input-field" placeholder="● ● ● ● ● ●"
-           maxlength="6" inputmode="numeric" pattern="[0-9]*"
-           autocomplete="off" style="text-align:center; font-size:1.5rem; letter-spacing:6px;">
+      <h1>Something awaits...</h1>
+      <p class="catchphrase">Enter the secret code to begin your quest.</p>
 
-    <div id="unlock-feedback" class="mb-16"></div>
+      <input type="tel" id="input-code" class="input-code" placeholder="● ● ● ● ● ●"
+             maxlength="6" inputmode="numeric" pattern="[0-9]*" autocomplete="off">
 
-    <button id="btn-unlock" class="btn btn-primary">Unlock</button>
+      <div id="unlock-feedback" class="mb-8"></div>
+
+      <button id="btn-unlock" class="btn btn-accent mt-12">Unlock</button>
+
+      <div class="snowflakes mt-12">❄ ❄ ❄</div>
+    </div>
   </div>
 
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
   <script src="js/unlock.js"></script>
-  <script>App.applyTeamTheme();</script>
+  <script>
+    App.applyTeamTheme();
+    const team = App.getTeamInfo();
+    if (team) {
+      document.getElementById('team-badge-wrap').classList.remove('hidden');
+      document.getElementById('mascot-img').src = team.mascotImg;
+      document.getElementById('team-name').textContent = team.name;
+    }
+  </script>
 </body>
 </html>

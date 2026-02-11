@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const statusEl = document.getElementById('preload-status');
   const startBtn = document.getElementById('btn-start-preload');
   const doneSection = document.getElementById('preload-done');
-  const teamNameEl = document.getElementById('team-name');
 
   // Detect and persist team from URL
   const teamId = App.detectTeamFromURL();
@@ -17,13 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
     App.setTeam(teamId);
   }
   App.applyTeamTheme();
-
-  // Show team info
-  const team = App.getTeamInfo();
-  if (team) {
-    teamNameEl.textContent = team.name;
-    document.getElementById('mascot-name').textContent = 'Assisted by ' + team.mascot;
-  }
 
   // Check if already preloaded
   if (App.isPreloaded()) {
@@ -71,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function showComplete() {
-    statusEl.innerHTML = '<div class="status status-success">All set! This phone is ready for the quiz.</div>';
+    statusEl.innerHTML = '<div class="status status-success">All set! Ready for the road.</div>';
     progressBar.style.width = '100%';
     progressText.textContent = 'Complete';
     doneSection.classList.remove('hidden');

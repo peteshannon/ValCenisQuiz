@@ -1,83 +1,115 @@
 /* ============================================
-   Val Cenis Music Quiz — Alpine Card Theme
-   Inspired by collectible mascot cards
+   Val Cenis Road Trip Music Quiz
+   Visual Design v2 — Collectible Card Aesthetic
+   Inspired by the Official Mascot Cards
    ============================================ */
 
-/* --- Google Fonts --- */
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Fredoka+One&display=swap');
+/* --- Fonts ---
+   Lora: warm serif for headings (echoes the card's display type)
+   Nunito: friendly rounded sans for body
+   ============================================ */
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Nunito:wght@400;600;700;800&display=swap');
 
 /* ============================================
-   BASE THEME
+   ROOT THEME
    ============================================ */
 :root {
-  /* Warm alpine palette */
-  --color-bg: #F5EFE0;
-  --color-surface: #FFFDF7;
-  --color-text: #3B3026;
-  --color-text-muted: #7A6F62;
-  --color-border: #DDD5C5;
-  --color-success: #5AAE6D;
-  --color-error: #C94B4B;
+  /* --- Parchment palette --- */
+  --color-bg: #EDE6D6;
+  --color-bg-warm: #E8DFD0;
+  --color-surface: #FAF6EE;
+  --color-surface-inner: #F5F0E5;
+  --color-text: #2A2318;
+  --color-text-muted: #6D6051;
+  --color-border: #C9BFAD;
+  --color-border-outer: #A89B87;
+  --color-divider: #D4CAB8;
 
-  /* Default accent (overridden per team) */
-  --color-primary: #2E6B4F;
-  --color-primary-light: #E8F0EB;
+  /* --- Accent colours (overridden per team) --- */
+  --color-primary: #3B6B4A;
+  --color-primary-dark: #2A4F36;
+  --color-primary-light: #E4EDE3;
   --color-accent: #C4873B;
+  --color-accent-dark: #A06B27;
   --color-accent-light: #F5E6D0;
-  --color-banner: #2E6B4F;
+  --color-banner-bg: #3B6B4A;
   --color-banner-text: #FFFFFF;
+  --color-ribbon: #2A4F36;
 
-  /* Card styling */
-  --radius: 20px;
-  --radius-sm: 12px;
-  --radius-xs: 8px;
-  --shadow: 0 2px 8px rgba(59, 48, 38, 0.08), 0 1px 3px rgba(59, 48, 38, 0.06);
-  --shadow-lg: 0 8px 30px rgba(59, 48, 38, 0.12), 0 2px 8px rgba(59, 48, 38, 0.08);
-  --shadow-card: 0 4px 16px rgba(59, 48, 38, 0.10), 0 1px 4px rgba(59, 48, 38, 0.06);
+  /* --- Status --- */
+  --color-success: #4A8C5C;
+  --color-error: #B84040;
 
-  /* Layout */
+  /* --- Card geometry --- */
+  --radius-card: 16px;
+  --radius-inner: 12px;
+  --radius-sm: 8px;
+  --radius-pill: 50px;
+  --card-border-w: 3px;
+  --card-inset: 6px;
+
+  /* --- Shadows --- */
+  --shadow-card: 
+    0 1px 2px rgba(42, 35, 24, 0.06),
+    0 4px 12px rgba(42, 35, 24, 0.08),
+    0 8px 28px rgba(42, 35, 24, 0.10);
+  --shadow-emboss: 
+    inset 0 2px 4px rgba(255,255,255,0.5),
+    inset 0 -1px 2px rgba(0,0,0,0.06);
+  --shadow-pressed:
+    inset 0 2px 6px rgba(0,0,0,0.15);
+
+  /* --- Layout --- */
   --touch-min: 50px;
-  --max-width: 400px;
+  --max-width: 380px;
 
-  /* Type */
-  --font-main: 'Nunito', system-ui, -apple-system, sans-serif;
-  --font-display: 'Fredoka One', 'Nunito', cursive, sans-serif;
+  /* --- Type --- */
+  --font-body: 'Nunito', system-ui, -apple-system, sans-serif;
+  --font-display: 'Lora', Georgia, 'Times New Roman', serif;
   --transition: 0.2s ease;
 }
 
 /* ============================================
-   TEAM COLOUR OVERRIDES
-   Applied via data-team attribute on <body>
+   TEAM COLOUR THEMES
    ============================================ */
 
-/* Team Shannon — forest greens, teal (Monsieur Cheval) */
+/* Shannon — sage greens, alpine forest (Monsieur Cheval) */
 [data-team="shannon"] {
-  --color-primary: #2E6B4F;
-  --color-primary-light: #E0EDDF;
-  --color-accent: #4A9E6F;
-  --color-accent-light: #E8F5E9;
-  --color-banner: #2E6B4F;
+  --color-primary: #3B6B4A;
+  --color-primary-dark: #2A4F36;
+  --color-primary-light: #DAE8DA;
+  --color-accent: #7BAF6E;
+  --color-accent-dark: #5A8C4E;
+  --color-accent-light: #EAF3E6;
+  --color-banner-bg: #3B6B4A;
   --color-banner-text: #FFFFFF;
+  --color-ribbon: #2A4F36;
 }
 
-/* Team James — warm oranges, russet (Raclette Raccoon) */
+/* James — russet orange, warm earth (Raclette Raccoon) */
 [data-team="james"] {
-  --color-primary: #C2572A;
-  --color-primary-light: #FBEADF;
-  --color-accent: #E8853A;
+  --color-primary: #B8522A;
+  --color-primary-dark: #8E3E1E;
+  --color-primary-light: #F5E0D4;
+  --color-accent: #E28A3E;
+  --color-accent-dark: #C06E28;
   --color-accent-light: #FFF0E0;
-  --color-banner: #C2572A;
+  --color-banner-bg: #B8522A;
   --color-banner-text: #FFFFFF;
+  --color-ribbon: #8E3E1E;
 }
 
-/* Team Medcalf — rich greens, gold (Prof Singe) */
+/* Medcalf — forest green, gold (Prof Singe) */
 [data-team="medcalf"] {
-  --color-primary: #3D7A3E;
-  --color-primary-light: #E5F0DA;
-  --color-accent: #C4A432;
-  --color-accent-light: #F8F0D4;
-  --color-banner: #3D7A3E;
+  --color-primary: #3D7040;
+  --color-primary-dark: #2B5230;
+  --color-primary-light: #DDECDA;
+  --color-accent: #C9A832;
+  --color-accent-dark: #A48926;
+  --color-accent-light: #F8F0D0;
+  --color-banner-bg: #3D7040;
   --color-banner-text: #FFFFFF;
+  --color-ribbon: #2B5230;
 }
 
 /* ============================================
@@ -91,44 +123,170 @@ html {
 }
 
 body {
-  font-family: var(--font-main);
+  font-family: var(--font-body);
   background: var(--color-bg);
   color: var(--color-text);
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 16px;
+  padding: 12px;
   line-height: 1.5;
-  background-image:
-    radial-gradient(ellipse at 20% 0%, rgba(200, 220, 210, 0.3) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 100%, rgba(210, 195, 170, 0.2) 0%, transparent 60%);
+  /* Subtle paper grain texture via repeating SVG noise */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
 }
 
 /* ============================================
-   CARD PANEL — The core visual element
-   Echoes the collectible card look
+   MOUNTAIN SILHOUETTE — top of every page
+   Pure CSS alpine skyline
+   ============================================ */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: 
+    linear-gradient(135deg, transparent 33%, var(--color-border) 33%, var(--color-border) 34%, transparent 34%),
+    linear-gradient(160deg, transparent 40%, var(--color-divider) 40%, var(--color-divider) 41%, transparent 41%),
+    linear-gradient(145deg, transparent 28%, var(--color-border) 28%, var(--color-border) 29%, transparent 29%),
+    linear-gradient(170deg, transparent 52%, var(--color-divider) 52%, var(--color-divider) 53%, transparent 53%);
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: linear-gradient(to bottom, black 30%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, black 30%, transparent);
+}
+
+/* ============================================
+   COLLECTIBLE CARD — The core component
+   Double-border frame like a physical card
    ============================================ */
 .card {
   background: var(--color-surface);
-  border-radius: var(--radius);
+  border-radius: var(--radius-card);
+  border: var(--card-border-w) solid var(--color-border-outer);
   box-shadow: var(--shadow-card);
-  padding: 28px 22px;
+  padding: 0;
   width: 100%;
   max-width: var(--max-width);
   margin-bottom: 16px;
-  border: 2px solid var(--color-border);
   position: relative;
+  overflow: hidden;
+  z-index: 1;
 }
 
-/* Subtle inner glow like parchment */
-.card::before {
+/* Inner frame — parchment inset */
+.card-inner {
+  margin: var(--card-inset);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-inner);
+  padding: 22px 18px;
+  background: var(--color-surface);
+  /* Parchment texture overlay */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
+}
+
+/* ============================================
+   RIBBON BANNER — Ornate header strip
+   Echoes the "OFFICIAL MASCOT" top banner
+   ============================================ */
+.ribbon {
+  background: var(--color-banner-bg);
+  color: var(--color-banner-text);
+  text-align: center;
+  padding: 10px 20px 8px;
+  position: relative;
+  margin: 0 -1px;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* Triangular ribbon edges */
+.ribbon::before,
+.ribbon::after {
   content: '';
   position: absolute;
-  inset: 4px;
-  border-radius: calc(var(--radius) - 4px);
-  border: 1px solid rgba(255, 253, 247, 0.6);
-  pointer-events: none;
+  bottom: -6px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+.ribbon::before {
+  left: 0;
+  border-width: 6px 0 0 8px;
+  border-color: var(--color-ribbon) transparent transparent transparent;
+}
+.ribbon::after {
+  right: 0;
+  border-width: 6px 8px 0 0;
+  border-color: var(--color-ribbon) transparent transparent transparent;
+}
+
+/* Sub-ribbon (team name pill below main ribbon) */
+.ribbon-sub {
+  display: inline-block;
+  background: var(--color-accent);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 3px 14px;
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-top: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+
+/* ============================================
+   CHARACTER STAT DIVIDER
+   The green "CHARACTER" banner from the cards
+   ============================================ */
+.stat-divider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0 10px;
+}
+.stat-divider::before,
+.stat-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--color-divider);
+}
+.stat-divider-label {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-banner-bg);
+  background: var(--color-primary-light);
+  padding: 2px 12px;
+  border-radius: var(--radius-pill);
+}
+
+/* Stat row — icon + text like the character traits */
+.stat-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--color-divider);
+  font-size: 0.88rem;
+}
+.stat-row:last-child { border-bottom: none; }
+.stat-icon {
+  font-size: 1.2rem;
+  width: 28px;
+  text-align: center;
+  flex-shrink: 0;
 }
 
 /* ============================================
@@ -136,90 +294,118 @@ body {
    ============================================ */
 h1 {
   font-family: var(--font-display);
-  font-size: 1.6rem;
-  font-weight: 400; /* Fredoka One is already bold */
+  font-size: 1.5rem;
+  font-weight: 700;
   color: var(--color-text);
-  margin-bottom: 10px;
-  letter-spacing: 0.3px;
+  margin-bottom: 8px;
+  line-height: 1.25;
 }
 
 h2 {
   font-family: var(--font-display);
-  font-size: 1.2rem;
-  font-weight: 400;
-  margin-bottom: 6px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 4px;
 }
 
 p {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   color: var(--color-text-muted);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
 }
 
 .text-center { text-align: center; }
 
+/* Italic catchphrase — like the card quotes */
+.catchphrase {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--color-primary);
+  margin: 10px 0;
+  line-height: 1.35;
+}
+
 /* ============================================
-   HEADER — Banner ribbon style
+   HEADER — Compact top bar
    ============================================ */
 .header {
   text-align: center;
-  padding: 12px 0 8px;
+  padding: 8px 0 4px;
   width: 100%;
   max-width: var(--max-width);
+  z-index: 1;
 }
 
 .brand {
   font-family: var(--font-display);
-  font-size: 1.4rem;
-  color: var(--color-primary);
-  letter-spacing: 0.5px;
-}
-
-.team-name {
-  display: inline-block;
-  background: var(--color-banner);
-  color: var(--color-banner-text);
-  font-size: 0.8rem;
-  font-weight: 700;
-  padding: 4px 16px;
-  border-radius: 20px;
-  margin-top: 6px;
-  letter-spacing: 0.3px;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  letter-spacing: 1px;
   text-transform: uppercase;
 }
 
-.round-indicator {
-  font-size: 0.95rem;
+.team-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-banner-bg);
+  color: var(--color-banner-text);
+  font-size: 0.72rem;
   font-weight: 700;
-  color: var(--color-primary);
-  margin-top: 8px;
-  background: var(--color-primary-light);
-  padding: 6px 14px;
-  border-radius: var(--radius-xs);
-  display: inline-block;
+  padding: 3px 12px 3px 4px;
+  border-radius: var(--radius-pill);
+  margin-top: 4px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
 }
-
-/* ============================================
-   MASCOT IMAGE
-   ============================================ */
-.mascot-img {
-  width: 120px;
-  height: auto;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  margin: 0 auto 12px;
-  display: block;
-  border: 2px solid var(--color-border);
-}
-
-.mascot-img-sm {
-  width: 56px;
-  height: 56px;
+.team-badge-img {
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   object-fit: cover;
   object-position: top;
-  border: 2px solid var(--color-banner);
-  box-shadow: var(--shadow);
+  border: 1.5px solid rgba(255,255,255,0.4);
+}
+
+/* ============================================
+   TRACK NUMBER — The big question identifier
+   Designed to be unmissable when swiping pages
+   ============================================ */
+.track-number {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1;
+  margin: 4px 0 2px;
+  /* Embossed text effect */
+  text-shadow: 
+    0 2px 0 rgba(255,255,255,0.6),
+    0 -1px 0 rgba(0,0,0,0.08);
+}
+
+.track-number-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 2px;
+}
+
+.round-name {
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.track-of {
+  font-size: 0.75rem;
+  color: var(--color-border-outer);
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 /* ============================================
@@ -230,11 +416,11 @@ p {
   align-items: center;
   justify-content: center;
   min-height: var(--touch-min);
-  padding: 14px 28px;
+  padding: 13px 24px;
   border: none;
   border-radius: var(--radius-sm);
-  font-family: var(--font-main);
-  font-size: 1.05rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
   transition: all var(--transition);
@@ -242,95 +428,143 @@ p {
   text-decoration: none;
   color: #fff;
   letter-spacing: 0.3px;
+  position: relative;
 }
 .btn:active { transform: scale(0.97); }
 
 .btn-primary {
   background: var(--color-primary);
-  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+  box-shadow: 0 3px 0 var(--color-primary-dark), 0 4px 8px rgba(0,0,0,0.12);
 }
-.btn-primary:hover { filter: brightness(1.08); }
+.btn-primary:active {
+  box-shadow: 0 1px 0 var(--color-primary-dark), 0 2px 4px rgba(0,0,0,0.12);
+  transform: translateY(2px);
+}
 
 .btn-accent {
   background: var(--color-accent);
-  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+  box-shadow: 0 3px 0 var(--color-accent-dark), 0 4px 8px rgba(0,0,0,0.12);
 }
-.btn-accent:hover { filter: brightness(1.08); }
+.btn-accent:active {
+  box-shadow: 0 1px 0 var(--color-accent-dark), 0 2px 4px rgba(0,0,0,0.12);
+  transform: translateY(2px);
+}
 
 .btn-success {
   background: var(--color-success);
-  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+  box-shadow: 0 3px 0 #3A7048, 0 4px 8px rgba(0,0,0,0.12);
 }
 
-/* Large circular play button */
+/* --- Play Button: Wax seal / embossed badge --- */
 .btn-play {
-  background: var(--color-accent);
-  width: 100px;
-  height: 100px;
+  background: radial-gradient(circle at 40% 35%, var(--color-accent), var(--color-accent-dark));
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
   font-size: 2.5rem;
   padding: 0;
-  box-shadow: var(--shadow-lg), 0 0 0 4px var(--color-accent-light);
-  margin: 20px auto;
+  margin: 12px auto;
   display: flex;
-  border: 3px solid rgba(255,255,255,0.3);
+  border: 4px solid var(--color-surface);
+  box-shadow: 
+    0 0 0 3px var(--color-accent-dark),
+    0 4px 12px rgba(0,0,0,0.18),
+    inset 0 2px 6px rgba(255,255,255,0.3),
+    inset 0 -2px 4px rgba(0,0,0,0.15);
 }
 .btn-play:active {
-  transform: scale(0.93);
-  box-shadow: var(--shadow), 0 0 0 4px var(--color-accent-light);
+  transform: scale(0.94);
+  box-shadow: 
+    0 0 0 3px var(--color-accent-dark),
+    0 2px 6px rgba(0,0,0,0.15),
+    inset 0 1px 3px rgba(255,255,255,0.2),
+    inset 0 2px 6px rgba(0,0,0,0.2);
 }
 
-/* Navigation buttons */
+/* --- Navigation buttons --- */
 .btn-nav {
-  background: var(--color-surface);
+  background: var(--color-surface-inner);
   color: var(--color-primary);
   border: 2px solid var(--color-border);
-  min-height: 46px;
-  padding: 10px 20px;
-  font-size: 0.95rem;
-  box-shadow: none;
+  min-height: 44px;
+  padding: 8px 16px;
+  font-size: 0.88rem;
+  box-shadow: var(--shadow-emboss);
 }
-.btn-nav:hover {
+.btn-nav:hover,
+.btn-nav:active {
   border-color: var(--color-primary);
   background: var(--color-primary-light);
+  box-shadow: var(--shadow-pressed);
 }
 
 .btn[disabled] {
-  opacity: 0.4;
+  opacity: 0.35;
   pointer-events: none;
-  filter: grayscale(0.3);
+  filter: grayscale(0.5);
 }
 
 /* ============================================
-   INPUTS
+   INPUTS — Handwritten answer lines
    ============================================ */
+.input-wrap {
+  margin-bottom: 14px;
+}
+
+.input-label {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: 3px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
 .input-field {
   width: 100%;
-  min-height: var(--touch-min);
-  padding: 14px 16px;
-  border: 2px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  font-size: 1rem;
-  font-family: var(--font-main);
-  background: var(--color-bg);
+  min-height: 44px;
+  padding: 10px 0 8px;
+  border: none;
+  border-bottom: 2px solid var(--color-border);
+  border-radius: 0;
+  font-size: 1.05rem;
+  font-family: var(--font-body);
+  background: transparent;
   color: var(--color-text);
-  transition: border-color var(--transition), box-shadow var(--transition);
-  margin-bottom: 12px;
+  transition: border-color var(--transition);
 }
 .input-field:focus {
   outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px var(--color-primary-light);
+  border-bottom-color: var(--color-primary);
+}
+.input-field::placeholder {
+  color: var(--color-border);
+  font-style: italic;
 }
 
-label {
-  display: block;
-  font-size: 0.82rem;
+/* Passcode input (unlock pages) — different style: boxed */
+.input-code {
+  width: 100%;
+  min-height: var(--touch-min);
+  padding: 12px 16px;
+  border: 3px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 1.6rem;
+  font-family: var(--font-display);
   font-weight: 700;
-  color: var(--color-text-muted);
-  margin-bottom: 4px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  background: var(--color-surface-inner);
+  color: var(--color-text);
+  text-align: center;
+  letter-spacing: 8px;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  box-shadow: var(--shadow-emboss);
+}
+.input-code:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
 }
 
 /* ============================================
@@ -338,17 +572,17 @@ label {
    ============================================ */
 .progress-wrap {
   width: 100%;
-  height: 14px;
-  background: var(--color-border);
-  border-radius: 7px;
+  height: 10px;
+  background: var(--color-bg-warm);
+  border-radius: 5px;
   overflow: hidden;
-  margin: 16px 0;
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.08);
+  margin: 14px 0;
+  border: 1px solid var(--color-divider);
 }
 .progress-bar {
   height: 100%;
   background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
-  border-radius: 7px;
+  border-radius: 5px;
   width: 0%;
   transition: width 0.4s ease;
 }
@@ -358,8 +592,8 @@ label {
    ============================================ */
 .nav-row {
   display: flex;
-  gap: 12px;
-  margin-top: 16px;
+  gap: 10px;
+  margin-top: 14px;
 }
 .nav-row .btn-nav { flex: 1; }
 
@@ -368,145 +602,162 @@ label {
    ============================================ */
 .status {
   text-align: center;
-  padding: 12px 16px;
-  border-radius: var(--radius-xs);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
   font-weight: 700;
-  margin: 12px 0;
-  font-size: 0.9rem;
+  margin: 10px 0;
+  font-size: 0.85rem;
 }
 .status-success {
-  background: #E8F5E9;
+  background: #E4F0E5;
   color: var(--color-success);
-  border: 1px solid #C8E6C9;
+  border: 1px solid #B8D8BA;
 }
 .status-error {
-  background: #FDECEA;
+  background: #F8E8E8;
   color: var(--color-error);
-  border: 1px solid #F5C6CB;
+  border: 1px solid #E8C0C0;
 }
 
 /* ============================================
-   INSTRUCTION ITEMS
+   INSTRUCTION ITEMS — Character stat style
    ============================================ */
 .instruction-item {
   display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  margin-bottom: 18px;
-  padding: 10px 12px;
-  background: var(--color-bg);
-  border-radius: var(--radius-xs);
-  border: 1px solid var(--color-border);
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--color-divider);
 }
-.instruction-item .instruction-icon {
-  font-size: 1.4rem;
+.instruction-item:last-of-type { border-bottom: none; }
+.instruction-icon {
+  font-size: 1.3rem;
   flex-shrink: 0;
   width: 32px;
-  text-align: center;
-  line-height: 1;
-  padding-top: 2px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary-light);
+  border-radius: 50%;
 }
 .instruction-item p {
   margin: 0;
   color: var(--color-text);
-  font-size: 0.9rem;
-  line-height: 1.45;
+  font-size: 0.88rem;
+  line-height: 1.4;
 }
 
 /* ============================================
-   ANSWERS REVEALED PAGE
+   ANSWERS REVEALED
    ============================================ */
 .reveal-card {
   background: var(--color-surface);
-  border-radius: var(--radius);
+  border-radius: var(--radius-card);
+  border: var(--card-border-w) solid var(--color-border-outer);
   box-shadow: var(--shadow-card);
-  padding: 28px 22px;
+  padding: 0;
   width: 100%;
   max-width: var(--max-width);
   margin-bottom: 16px;
-  text-align: center;
+  overflow: hidden;
+  z-index: 1;
+}
+.reveal-card-inner {
+  margin: var(--card-inset);
   border: 2px solid var(--color-border);
+  border-radius: var(--radius-inner);
+  padding: 22px 18px;
+  text-align: center;
+  background: var(--color-surface);
 }
 
 .answer-correct {
-  background: #E8F5E9;
-  border: 2px solid #A5D6A7;
+  background: var(--color-primary-light);
+  border: 2px solid var(--color-primary);
   border-radius: var(--radius-sm);
-  padding: 16px;
-  margin: 14px 0;
+  padding: 14px;
+  margin: 12px 0;
 }
 .answer-correct .label {
-  font-size: 0.75rem;
+  font-family: var(--font-display);
+  font-size: 0.68rem;
   font-weight: 700;
-  color: var(--color-success);
+  color: var(--color-primary);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1.5px;
   margin-bottom: 6px;
 }
 .answer-correct .value {
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: 1.1rem;
+  font-weight: 700;
   color: var(--color-text);
+  line-height: 1.3;
 }
 
 .answer-yours {
-  background: var(--color-bg);
+  background: var(--color-bg-warm);
   border: 2px solid var(--color-border);
   border-radius: var(--radius-sm);
-  padding: 14px;
-  margin: 8px 0;
+  padding: 12px;
+  margin: 6px 0;
 }
 .answer-yours .label {
-  font-size: 0.75rem;
+  font-family: var(--font-display);
+  font-size: 0.68rem;
   font-weight: 700;
   color: var(--color-text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
   margin-bottom: 4px;
 }
 .answer-yours .value {
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: var(--color-text);
 }
 
 .track-counter {
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   color: var(--color-text-muted);
-  margin-bottom: 8px;
-  font-weight: 600;
+  margin-bottom: 6px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 .round-banner {
   font-family: var(--font-display);
-  font-size: 1rem;
+  font-size: 0.9rem;
+  font-weight: 700;
   color: var(--color-primary);
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .progress-track {
-  height: 5px;
-  background: var(--color-border);
-  border-radius: 3px;
-  margin: 14px 0;
+  height: 4px;
+  background: var(--color-divider);
+  border-radius: 2px;
+  margin: 12px 0;
   overflow: hidden;
 }
 .progress-track-fill {
   height: 100%;
   background: var(--color-accent);
-  border-radius: 3px;
+  border-radius: 2px;
   width: 0%;
   transition: width 0.3s linear;
 }
 
 .waiting-msg {
-  font-size: 0.9rem;
-  color: var(--color-text-muted);
-  margin-top: 8px;
+  font-family: var(--font-display);
   font-style: italic;
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  margin-top: 6px;
 }
 
 /* ============================================
-   CELEBRATION ICONS
+   CELEBRATION / DECORATIVE ICONS
    ============================================ */
 .celebration-icon {
   font-size: 3rem;
@@ -514,19 +765,38 @@ label {
   line-height: 1;
 }
 
+/* Snowflake decorations */
+.snowflakes {
+  color: var(--color-border);
+  font-size: 0.9rem;
+  letter-spacing: 6px;
+  margin: 6px 0;
+  opacity: 0.5;
+}
+
 /* ============================================
-   UTILITIES
+   LOGO (card-back crossed skis)
    ============================================ */
-.hidden { display: none !important; }
-.mb-8 { margin-bottom: 8px; }
-.mb-16 { margin-bottom: 16px; }
-.mt-16 { margin-top: 16px; }
+.logo-img {
+  width: 140px;
+  height: auto;
+  margin: 0 auto 8px;
+  display: block;
+}
 
-/* --- Audio element (hidden native controls) --- */
-audio { display: none; }
+/* Mascot image (start page) */
+.mascot-img {
+  width: 130px;
+  height: auto;
+  border-radius: var(--radius-inner);
+  margin: 0 auto 8px;
+  display: block;
+  border: 2px solid var(--color-border);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
 
 /* ============================================
-   HOLDING PAGE — vertically centred
+   HOLDING PAGE — Full centred layout
    ============================================ */
 .holding-container {
   flex: 1;
@@ -535,4 +805,82 @@ audio { display: none; }
   align-items: center;
   justify-content: center;
   text-align: center;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--max-width);
 }
+
+/* Holding page uses a card-back style card */
+.card-back {
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  border: var(--card-border-w) solid var(--color-border-outer);
+  box-shadow: var(--shadow-card);
+  width: 100%;
+  max-width: var(--max-width);
+  overflow: hidden;
+}
+.card-back-inner {
+  margin: var(--card-inset);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-inner);
+  padding: 32px 22px;
+  text-align: center;
+  background: var(--color-surface);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
+}
+
+/* ============================================
+   ROUND INTRO — Dramatic centre card
+   ============================================ */
+.round-intro-number {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-banner-text);
+  background: var(--color-banner-bg);
+  padding: 4px 18px;
+  border-radius: var(--radius-pill);
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.round-intro-title {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 4px;
+}
+
+.round-intro-desc {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  margin-bottom: 4px;
+}
+
+.round-intro-count {
+  font-size: 0.82rem;
+  color: var(--color-border-outer);
+  font-weight: 700;
+}
+
+/* ============================================
+   UTILITIES
+   ============================================ */
+.hidden { display: none !important; }
+.mb-4 { margin-bottom: 4px; }
+.mb-8 { margin-bottom: 8px; }
+.mb-12 { margin-bottom: 12px; }
+.mb-16 { margin-bottom: 16px; }
+.mt-8 { margin-top: 8px; }
+.mt-12 { margin-top: 12px; }
+.mt-16 { margin-top: 16px; }
+.mt-20 { margin-top: 20px; }
+
+/* --- Audio element (hidden native controls) --- */
+audio { display: none; }

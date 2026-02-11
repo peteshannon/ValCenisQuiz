@@ -15,27 +15,37 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!track) { window.location.href = 'holding.html'; return; }
 
   // --- UI Elements ---
-  const teamNameEl   = document.getElementById('team-name');
-  const roundInfoEl  = document.getElementById('round-info');
-  const trackInfoEl  = document.getElementById('track-info');
-  const playBtn      = document.getElementById('btn-play');
-  const audioEl      = document.getElementById('audio-player');
-  const artistInput  = document.getElementById('input-artist');
-  const songInput    = document.getElementById('input-song');
-  const submitBtn    = document.getElementById('btn-submit');
-  const prevBtn      = document.getElementById('btn-prev');
-  const nextBtn      = document.getElementById('btn-next');
-  const submitStatus = document.getElementById('submit-status');
+  const roundRibbonEl = document.getElementById('round-ribbon');
+  const roundInfoEl   = document.getElementById('round-info');
+  const trackNumEl    = document.getElementById('track-number');
+  const trackOfEl     = document.getElementById('track-of');
+  const playBtn       = document.getElementById('btn-play');
+  const audioEl       = document.getElementById('audio-player');
+  const artistInput   = document.getElementById('input-artist');
+  const songInput     = document.getElementById('input-song');
+  const submitBtn     = document.getElementById('btn-submit');
+  const prevBtn       = document.getElementById('btn-prev');
+  const nextBtn       = document.getElementById('btn-next');
+  const submitStatus  = document.getElementById('submit-status');
 
-  // --- Team Info ---
+  // --- Team Badge ---
   const team = App.getTeamInfo();
   if (team) {
-    teamNameEl.textContent = `${team.name} — assisted by ${team.mascot} ${team.mascotEmoji}`;
+    const badgeWrap = document.getElementById('team-badge-wrap');
+    if (badgeWrap) {
+      badgeWrap.classList.remove('hidden');
+      const img = document.getElementById('mascot-img');
+      if (img) img.src = team.mascotImg;
+      const nameEl = document.getElementById('team-name-badge');
+      if (nameEl) nameEl.textContent = team.name;
+    }
   }
 
   // --- Round/Track Header ---
-  roundInfoEl.textContent = `${round.title}`;
-  trackInfoEl.textContent = `${track.label} of ${round.tracks.length}`;
+  roundRibbonEl.textContent = 'Round ' + (roundIdx + 1);
+  roundInfoEl.textContent = round.title;
+  trackNumEl.textContent = trackIdx + 1;
+  trackOfEl.textContent = 'of ' + round.tracks.length;
 
   // --- Load existing answer ---
   const existing = App.getAnswer(track.id);
@@ -46,7 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Audio Source ---
   audioEl.src = track.audio;
-  // Prevent scrubbing: no controls exposed, just our play button
 
   let firstPlayTime = existing?.firstPlayTime || null;
   let firstSubmitTime = existing?.firstSubmitTime || null;
@@ -109,7 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (trackIdx > 0) {
     prevBtn.href = App.getTrackLocation(roundIdx, trackIdx - 1);
   } else if (roundIdx > 0) {
-    // Go to last track of previous round
     const prevRound = QUIZ_DATA.rounds[roundIdx - 1];
     prevBtn.href = App.getTrackLocation(roundIdx - 1, prevRound.tracks.length - 1);
   } else {
