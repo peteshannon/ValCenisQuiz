@@ -47,8 +47,8 @@ const QUIZ_DATA = {
 
   /* Unlock codes */
   unlockCodes: {
-    quizStart: '241205',
-    answersReveal: '251231',
+    quizStart: '193367',
+    answersReveal: '444444',
   },
 
   /* Google Apps Script endpoint for results */

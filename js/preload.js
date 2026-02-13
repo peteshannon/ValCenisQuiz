@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const resp = await fetch(url);
         if (resp.ok) {
           // Put into cache via Cache API directly
-          const cache = await caches.open('vcquiz-v16');
+          const cache = await caches.open('vcquiz-v17');
           await cache.put(url, resp);
         }
       } catch (err) {
